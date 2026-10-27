@@ -2,9 +2,29 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Data Publishing with washr",
+    "title": "FAIR Data Publishing",
     "section": "",
-    "text": "Welcome\nPublishing data can be challenging, especially when adhering to standards of reproducibility. Although technically available, an Excel workbook with multiple tabs, tucked away in an online archive, is far from practical. In other words, it lacks the key principles of being findable, accessible, interoperable, and reproducible — commonly known as FAIR.\nThis guide aims to provide a detailed walkthrough of how data can be published according to the FAIR principles. It builds on washr, an R package developed for swift data publication. The package emerged from the need to streamline certain steps when publishing the datasets collected during GHE’s openwashdata academy. The code in this guide was last checked against washr version 1.1.0, the version recorded in the WASHR_VERSION file of the source repository.\nThe guide follows a chronological structure, starting from an empty repository and resulting in the publication of data as a website. 1  Creating a repository introduces version control, guiding readers through setting up both local and remote repositories to track all development steps. 2  Preparing your dataset focuses on transforming the dataset into a tidy format. 3  Documenting Your Dataset covers the documentation of the tidy dataset. 4  Publishing Your Dataset explains how users can create a website to showcase their dataset. Finally, 5  Creating a DOI and connecting it to GitHub helps you create a Digital Object Identifier (DOI) for your published data.\nThis book is a work in progress. As we publish more data, we learn more and these insights flow back into this book. If something is unclear or incomplete, please open an issue here and we’ll try to address it.",
+    "text": "Welcome\nA dataset that sits as a spreadsheet in an online archive is available in principle, but hard to find, hard to understand and hard to cite. The FAIR principles ask for more. Data should be findable, accessible, interoperable and reusable. This guide walks through one way to get there. You turn a cleaned dataset into an R data package with a data dictionary, help pages, a README, a website, citation files and machine readable metadata, and you publish it with a DOI.\nThe guide is written for researchers at Global Health Engineering at ETH Zurich and for the openwashdata community, and it works for anyone who publishes a dataset under their own GitHub organisation. It builds on washr, the R package that writes each file of the package from what you have already written. The code in this guide was last checked against washr version 1.2.0, the version recorded in the WASHR_VERSION file of the source repository.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "index.html#three-ways-to-follow-the-workflow",
+    "href": "index.html#three-ways-to-follow-the-workflow",
+    "title": "FAIR Data Publishing",
+    "section": "Three ways to follow the workflow",
+    "text": "Three ways to follow the workflow\nThe same steps exist in three forms, and each form has one job.\n\nThis guide is the narrative. It explains why each step exists and covers the parts that happen outside R, such as creating the GitHub repository and the Zenodo release. It needs no AI tools.\nThe washr vignette Get started with washr is the condensed reference, with one section per function in the same order as the chapters here.\nThe washr skill in the openwashdata plugin for Claude Code is the AI assisted path. It runs the same functions and drafts the descriptions, titles and README text for you to confirm.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "index.html#what-the-chapters-cover",
+    "href": "index.html#what-the-chapters-cover",
+    "title": "FAIR Data Publishing",
+    "section": "What the chapters cover",
+    "text": "What the chapters cover\n1  Creating the package and its repository creates the package and connects it to GitHub. 2  Preparing the data brings in the raw data, cleans it into a tidy dataset and writes the data dictionary. 3  Documenting the data writes the help pages, completes the package metadata and generates the machine readable description. 4  Publishing the data writes the README and builds the website. 5  Creating a release and a DOI creates the release and the DOI. 6  Troubleshooting collects the problems we have seen and what fixed them.\nEvery washr function reads what is there, merges its changes and writes only what changed, so you can run a step again after you have edited the files it wrote.\nThis guide is a work in progress. As more data is published, we learn more, and these insights flow back into the guide. If something is unclear or incomplete, please open an issue in the source repository.",
     "crumbs": [
       "Welcome"
     ]
@@ -12,141 +32,221 @@
   {
     "objectID": "creating_repo.html",
     "href": "creating_repo.html",
-    "title": "1  Creating a repository",
+    "title": "1  Creating the package and its repository",
     "section": "",
-    "text": "Note\n\n\n\nThe following steps assume that you are a member of GHE on GitHub. If you are not, reach out here so we can create a repository for you.\n\n\nAs your very first step, you have to create a new repository within the Global Health Engineering (hereafter referred to as GHE) organization on GitHub. You can do this here.\nChoose a name for your repository, make it public if your data is not confidential/sensitive and click on “Create repository”. For now, you don’t need a README, .gitignore file or a license. You’ll add these at a later stage.\nOnce the repository is initialized, go back to RStudio and check if the devtools and usethis packages are installed. If not, please install/update them now as some of their functions are needed in the next steps.\nNext, you have to create an R Project. Go to File &gt; New Project &gt; New Directory &gt; R Package using devtools.\n\n\n\n\n\nCopy and paste the name you chose for your GitHub repository as the directory name and select a location on your computer for your new project.\n\n\n\n\n\n\nNote\n\n\n\nFor the next steps, we assume that you’ve already configured Git on your computer. If not, please make sure to do that before proceeding.\n\n\nBefore you can connect your project to GitHub, your project needs to be a Git repository with at least one commit. Run the following command in the Console:\n\nusethis::use_git()\n\nWhen asked whether it is ok to commit the files, accept the initial commit. Afterwards, usethis asks to restart RStudio so that the Git tab appears. Accept this as well and wait for RStudio to restart.\nWith your project set up locally and a new repository online, it’s time to connect the two. To do this, switch to the Terminal (the tab next to Console in RStudio) and run the following commands one after the other.\n\n\n\n\n\n\nWarning\n\n\n\nReplace REPO with the name of your newly created repository.\n\n\ngit remote add origin \"https://github.com/Global-Health-Engineering/REPO.git\" \n\ngit branch -M main\n\ngit push -u origin main\nIf everything went well, your local repository (on your computer) should now be connected to the remote repository (on GitHub) which allows you to push and pull changes and to invite collaborators.",
+    "text": "1.1 Create the package\nEverything you publish lives in one R package, and the package lives in one Git repository on GitHub. This chapter creates both and connects them. You need R, RStudio, Git and a GitHub account, and you need to be a member of the GitHub organisation you publish under.\nBefore you start, check that the usethis, devtools and washr packages are installed. All three are on CRAN:\nGit needs your name and email, and usethis needs to know your GitHub account. usethis::git_sitrep() reports what is set and what is missing, and the usethis article Managing Git(Hub) credentials explains the setup.\nThe package name is the name of the dataset, in lower case, with no dots or underscores. Choose it with care, because it becomes the repository name, the name people install and the name in every citation. In the R console, create the package and open it as a project:\nusethis::create_package(\"~/path/to/yourpackagename\")\nRStudio opens the new project. The folder holds a DESCRIPTION file, an empty R/ folder and a NAMESPACE file. Everything else is added in the next chapters. The RStudio menu File &gt; New Project &gt; New Directory &gt; R Package using devtools does the same.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Creating a repository</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Creating the package and its repository</span>"
+    ]
+  },
+  {
+    "objectID": "creating_repo.html#put-it-under-version-control",
+    "href": "creating_repo.html#put-it-under-version-control",
+    "title": "1  Creating the package and its repository",
+    "section": "1.2 Put it under version control",
+    "text": "1.2 Put it under version control\nThe project needs to be a Git repository with at least one commit before it can go to GitHub. Run:\n\nusethis::use_git()\n\nusethis asks whether it may commit the files. Accept. It then asks to restart RStudio so that the Git tab appears. Accept this as well and wait for the restart.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Creating the package and its repository</span>"
+    ]
+  },
+  {
+    "objectID": "creating_repo.html#create-the-repository-on-github",
+    "href": "creating_repo.html#create-the-repository-on-github",
+    "title": "1  Creating the package and its repository",
+    "section": "1.3 Create the repository on GitHub",
+    "text": "1.3 Create the repository on GitHub\nWith the project under version control, one call creates the repository in your organisation, connects it to your project and pushes the first commit:\n\nusethis::use_github(organisation = \"openwashdata\")\n\nReplace the organisation with the one you publish under. The repository is public, which is right for data that holds nothing confidential or personal. Chapter 2 covers that check before any data is pushed. The call needs a GitHub token with permission to create repositories in the organisation. usethis::gh_token_help() explains how to get one.\nIf the call fails, create the repository by hand. Go to the organisation page on GitHub, click “New repository”, give it the package name, keep it empty (no README, no .gitignore file, no license, they are added later) and create it. Then switch to the Terminal tab in RStudio, next to the Console, and connect the two, with ORGANISATION and REPO replaced:\ngit remote add origin \"https://github.com/ORGANISATION/REPO.git\"\ngit branch -M main\ngit push -u origin main\nAfterwards, run usethis::use_github_links() once, so that DESCRIPTION names the repository. use_github() does this on its own.\nEither way, your local repository on your computer is now connected to the remote repository on GitHub, so you can push and pull changes and invite collaborators.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Creating the package and its repository</span>"
+    ]
+  },
+  {
+    "objectID": "creating_repo.html#add-the-check-that-runs-on-every-push",
+    "href": "creating_repo.html#add-the-check-that-runs-on-every-push",
+    "title": "1  Creating the package and its repository",
+    "section": "1.4 Add the check that runs on every push",
+    "text": "1.4 Add the check that runs on every push\nwashr writes a GitHub Actions workflow that runs R CMD check on every push and pull request, on macOS, Windows and three versions of R on Linux. The openwashdata review standard requires it, so add it now and the package meets that part of the standard from its first commit:\n\nlibrary(washr)\nsetup_ci()\n\nThe workflow lands in .github/workflows/R-CMD-check.yaml. Commit it and push.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Creating the package and its repository</span>"
+    ]
+  },
+  {
+    "objectID": "creating_repo.html#committing-and-pushing-from-rstudio",
+    "href": "creating_repo.html#committing-and-pushing-from-rstudio",
+    "title": "1  Creating the package and its repository",
+    "section": "1.5 Committing and pushing from RStudio",
+    "text": "1.5 Committing and pushing from RStudio\nThe chapters that follow end each step with a commit and a push. In RStudio, open the Git tab in the top right panel. Click “Pull” first, so that you have the latest changes. Tick the boxes next to the files you added or changed and click “Commit”. A window opens. Write a short message that says what changed, for example “Add raw data files”, and click “Commit”. Then click “Push” to upload the commit to GitHub.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Creating the package and its repository</span>"
     ]
   },
   {
     "objectID": "data_preparation.html",
     "href": "data_preparation.html",
-    "title": "2  Preparing your dataset",
+    "title": "2  Preparing the data",
     "section": "",
-    "text": "2.1 Clean and Process Your Raw Data\nEverything starts with a dataset that you want to publish. You might even have several datasets, some stored locally on your computer, others on an external hard drive or in the cloud.\nBefore the data, add the check that every push to GitHub will run. Open your R console within your project and execute:\nThis writes a GitHub Actions workflow that runs R CMD check on every push and pull request, on macOS, Windows and Linux. The openwashdata review standard requires it, and your package now meets that part of the standard from its first commit.\nAs a first step for the data, you need to create a data directory where all datasets are stored in one place. In your R console, execute:\nThis command will create a new directory called data-raw in your project folder where you will store all your raw datasets. Copy or move all your files into the newly created data-raw directory.\nNext, you’ll want to have this directory under version control so that you can track your changes.\nIn RStudio, locate the “Git” tab in the top-right panel. As a good practice, begin by clicking “Pull” to ensure you have the latest changes. In the Git tab, you will see a list of changed files—tick the checkboxes next to all the files you’ve added or modified. Next, click the “Commit” button. A new window will appear where you can enter a descriptive commit message, explaining what changes you’ve made (for example, “Add raw data files to data-raw directory”). Finally, click the “Push” button to upload your changes to GitHub.\nOpen the file data-raw/data_processing.R in your RStudio editor, which contains some pre-populated code. You’ll need to modify this script to fit your specific data cleaning needs. Add your own R code to clean and process your raw data files, ensuring that the script reads the files from the data-raw directory and outputs a tidy, well-organized version of the data.\nAfter you’ve finished editing data_processing.R, run the entire script to execute your data cleaning process. You can do this by clicking “Source” at the top of the editor window, or by selecting all the code and clicking “Run.” This will process your raw data and produce a tidy version of the dataset, ready for analysis.\nReturn to the “Git” tab in RStudio, where you should see your modified data_processing.R file, along with any new output files that may have been generated. Commit these changes by entering a meaningful commit message, such as “Clean and process raw data.” Once you’ve committed the changes, push them to GitHub to ensure your updates are saved and accessible.",
+    "text": "2.1 Bring in the raw data\nEverything starts with a dataset that you want to publish. You might have several files, some on your computer, others on an external drive or in the cloud. This chapter brings them into the package, cleans them into one or more tidy datasets and describes every variable in a data dictionary.\nIn the R console, from the package project, run:\nlibrary(washr)\nsetup_rawdata()\nThis creates the folder data-raw/ and a processing script, data-raw/data_processing.R, with the steps the script should follow. Copy or move your raw files into data-raw/. The raw files are kept exactly as you received them and are never edited by hand. Every change happens in the script, so anyone can trace the published data back to the source.\nCommit the raw files and push.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Preparing your dataset</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Preparing the data</span>"
     ]
   },
   {
-    "objectID": "data_preparation.html#creating-a-data-dictionary",
-    "href": "data_preparation.html#creating-a-data-dictionary",
-    "title": "2  Preparing your dataset",
-    "section": "2.2 Creating a Data Dictionary",
-    "text": "2.2 Creating a Data Dictionary\n\n2.2.1 Set Up the Dictionary Template\nIn your R console, execute the command setup_dictionary(). This will create a new file called dictionary.csv in your data-raw directory.\n\n\n2.2.2 Fill in the Data Dictionary\nNext, open data-raw/dictionary.csv in a spreadsheet program like Excel or in RStudio’s data viewer. You will see columns corresponding to each dataset and variable in your tidy data. Focus on the “description” column: for each row representing a variable, provide a clear and concise description of what that variable represents. Include relevant information such as units of measurement, possible values, or any other pertinent details. Once you’ve completed this, save your changes to dictionary.csv.\n\n\n2.2.3 Update GitHub with Your Data Dictionary\nReturn to the “Git” tab in RStudio, where you should see the modified dictionary.csv file. Commit these changes with a message like “Add data dictionary,” and then push your changes to GitHub.\nFinally, review your GitHub repository online to ensure that all your changes have been uploaded correctly. You should now have a data-raw directory containing your original data files, a data_processing.R script in which you clean your data, and a dictionary.csv file describing your tidy dataset.\nCongratulations! You’ve successfully prepared your dataset and created a data dictionary, all while maintaining version control with Git and GitHub.",
+    "objectID": "data_preparation.html#clean-and-process-the-raw-data",
+    "href": "data_preparation.html#clean-and-process-the-raw-data",
+    "title": "2  Preparing the data",
+    "section": "2.2 Clean and process the raw data",
+    "text": "2.2 Clean and process the raw data\nOpen data-raw/data_processing.R. The script reads the raw files, cleans them into one or more tidy data frames and saves each one in two forms. usethis::use_data() writes an .rda file into data/, which is what the package loads. readr::write_csv() and openxlsx::write.xlsx() write a CSV and an XLSX file into inst/extdata/, which is what the website and the download table of the README link to. The template already holds the reading, saving and export blocks for one data frame named after the package. Add your cleaning steps in between, and keep that name for your main dataset or change it in all three export calls.\nA package can hold more than one dataset. In that case, repeat the saving and export block for each data frame, so that each one lands in data/ and in inst/extdata/.\nWhen the script is finished, run it from top to bottom with “Source” in the editor. Check the results in data/ and inst/extdata/, then commit the script and the generated files and push.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Preparing your dataset</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Preparing the data</span>"
+    ]
+  },
+  {
+    "objectID": "data_preparation.html#write-the-data-dictionary",
+    "href": "data_preparation.html#write-the-data-dictionary",
+    "title": "2  Preparing the data",
+    "section": "2.3 Write the data dictionary",
+    "text": "2.3 Write the data dictionary\nThe dictionary is the one place where variables are described. The help pages and the metadata are generated from it. Run:\n\nsetup_dictionary()\n\nThis reads every dataset in data/ and writes data-raw/dictionary.csv with one row per variable. The columns are the folder, the file the variable belongs to, the variable name, its type and an empty description.\nOpen the file in RStudio or in a spreadsheet program and write a description for every variable. The description is the most important text of the whole package. A reader who has never seen your project should understand what a variable means from the description alone.\n\nWrite one sentence in plain language.\nSay what was measured or recorded.\nGive the unit when there is one.\nName the possible values when there are few.\n\nTwo descriptions that work:\n\n“Distance in meters from the household to the nearest water point.”\n“Whether the water point was working on the day of the visit (yes or no).”\n\nTwo that do not, because they repeat the variable name or stay vague:\n\n“The distance variable.”\n“Status.”\n\nLeave no description empty. Keep the five columns washr wrote, in their order, and do not edit the type column, which washr fills from the data. If you edit the file in Excel, save it in the “CSV UTF-8” format, because the plain CSV format of Excel on Windows is not UTF-8.\nCommit the dictionary and push.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Preparing the data</span>"
+    ]
+  },
+  {
+    "objectID": "data_preparation.html#when-the-data-changes-later",
+    "href": "data_preparation.html#when-the-data-changes-later",
+    "title": "2  Preparing the data",
+    "section": "2.4 When the data changes later",
+    "text": "2.4 When the data changes later\nWhen the processing script changes and a variable is added, removed or changes its type, run:\n\nupdate_dictionary()\n\nIt adds a row for each new variable, removes the row of a variable that no longer exists, refreshes the types and keeps every description you wrote. Running setup_dictionary() again would stop, because the dictionary exists. After an update, run setup_roxygen() from the next chapter again, so that the help pages follow.\nYour repository now holds the raw files, the processing script, the tidy datasets with their exports, and the dictionary, all under version control.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Preparing the data</span>"
     ]
   },
   {
     "objectID": "data_documentation.html",
     "href": "data_documentation.html",
-    "title": "3  Documenting Your Dataset",
+    "title": "3  Documenting the data",
     "section": "",
-    "text": "3.1 Setting Up and Writing Documentation with Roxygen\nIn the next steps, the goal is to document not only the dataset itself but also the functions and the package as a whole. The individual steps are visualized in the figure below.\nTo begin documenting your dataset, start by initializing Roxygen documentation. Open your R console within the project and run the following command:\nsetup_roxygen()\nThis will create the necessary documentation files in the R/ folder of your project, setting up the foundation for detailed documentation.",
+    "text": "3.1 Write the help pages\nThe dictionary describes the variables. This chapter turns it into help pages, completes the description of the package as a whole and generates the machine readable metadata that dataset search engines read.\nEvery dataset in an R package has a help page. washr writes its source from the dictionary:\nsetup_roxygen()\nThis creates one file per dataset under R/, with a title placeholder, a description placeholder and the variable table from the dictionary, written as roxygen comments (lines that start with #').\nOpen each file and replace the two placeholders. The title is a human readable name of the dataset, on one line. The description is a brief statement of what the dataset contains and what it is for. Then add a @source line above the quoted dataset name at the end of the file. It names who collected the data, a URL or a reference, and the date you accessed it. For a data package, the source is the most important field of the help page after the description.\nThe lines from @format to the closing brace are generated from the dictionary. Do not edit them. When a description changes, change it in the dictionary and run setup_roxygen() again. It regenerates only the variable table and keeps the title, the description and the source you wrote.\nThen build the help pages, check the package and install it:\ndevtools::document()\ndevtools::check()\ndevtools::install()\ndevtools::document() writes the help pages to man/. devtools::check() runs the same check as the workflow on GitHub. A warning about the license is expected at this point and goes away in the next section. devtools::install() installs the package on your computer, so that the README and the website can load the data.\nCommit and push.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Documenting Your Dataset</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Documenting the data</span>"
     ]
   },
   {
-    "objectID": "data_documentation.html#setting-up-and-writing-documentation-with-roxygen",
-    "href": "data_documentation.html#setting-up-and-writing-documentation-with-roxygen",
-    "title": "3  Documenting Your Dataset",
-    "section": "",
-    "text": "3.1.1 Writing Documentation\nOnce the documentation files are generated, navigate to the R/ folder in your project. Each file in this folder, with a .R extension, represents a dataset or function. Open these files and provide a human-readable title and description using Roxygen comments (lines that start with #'). For instance, you could use the following format to document your dataset:\n#' Title of Your Dataset\n#'\n#' A brief description of what the dataset contains and its purpose.\n#'\n#' @format A data frame with X rows and Y columns:\n#' \\describe{\n#'   \\item{column1}{Description of column1}\n#'   \\item{column2}{Description of column2}\n#'   ...\n#' }\n#' @source Where the data comes from (if applicable)\n\"dataset_name\"\nThis method allows you to provide clear, concise details about each dataset, ensuring that users understand its structure and purpose.\n\n\n3.1.2 Updating Your GitHub Repository\nOnce you’ve completed the documentation, it’s time to update your GitHub repository. In RStudio, go to the “Git” tab. Stage all the changed files by checking the boxes next to them, then click “Commit”. Write a meaningful commit message, such as “Add Roxygen documentation for dataset”, and click “Push” to update your repository with the latest changes.\n\n\n3.1.3 Finalizing and Installing the Documentation\nNow that your documentation is written, run the following commands in your R console:\n\ndevtools::document()\ndevtools::check()\ndevtools::install()\n\nThese commands will generate the documentation from your Roxygen comments, check for any issues in the package, and install it locally. If you receive a warning about the license, don’t worry, as it will be addressed in the next section.",
+    "objectID": "data_documentation.html#complete-the-description-file",
+    "href": "data_documentation.html#complete-the-description-file",
+    "title": "3  Documenting the data",
+    "section": "3.2 Complete the DESCRIPTION file",
+    "text": "3.2 Complete the DESCRIPTION file\nDESCRIPTION describes the package as a whole, with its title, what it contains, who made it and under which license. The citation files, the README, the website and the metadata all read from it, so a value that is wrong here is wrong everywhere. Fix it here and never in a generated file.\n\n3.2.1 Authors\nAdd yourself as author and maintainer:\n\nusethis::use_author(\n  given = \"Your First Name\",\n  family = \"Your Last Name\",\n  role = c(\"aut\", \"cre\"),\n  email = \"your.email@example.com\",\n  comment = c(ORCID = \"0000-0000-0000-0000\")\n)\n\naut marks an author and cre the maintainer, the person who receives questions about the package. The ORCID iD reaches the citation files, the Zenodo record and the metadata, so give it when you have one.\nAdd every other person who contributed with the same call, with role = \"aut\" for an author and role = \"ctb\" for a contributor. To collect the names, email addresses, roles and ORCID iDs, open an issue in the repository titled “Author information for DESCRIPTION” and ask everyone to add their line.\n\n\n3.2.2 The fields washr writes\n\nupdate_description()\n\nThe call sets the fields the review standard expects and keeps every value that is already there. It writes the language, the date, the repository and bug report URLs, which it takes from the repository named in DESCRIPTION, and the CC BY 4.0 license when the package has none yet. It also writes a few Config/washr/ fields, such as the funding sentence of the website and the analytics domain, with the openwashdata values for a package under openwashdata. The later steps read them from DESCRIPTION. The vignette section Publishing outside openwashdata explains how another organisation sets its own values.\nNow open DESCRIPTION and write the title and the description. The title is one line in title case without a final period. The description is one paragraph that says what the data contains, where it comes from and when it was collected.\n\n\n3.2.3 Keywords, coverage and source\nThree facts have no other home and go into DESCRIPTION by hand. Add three lines with your own values:\nX-schema.org-keywords: sanitation, faecal sludge, Kampala\nX-schema.org-spatialCoverage: Kampala, Uganda\nX-schema.org-temporalCoverage: 2022-03-01/2022-09-30\nThe keywords are a comma separated list. For an openwashdata package, start with open data and washdata, then add the topic and the country or region. The spatial coverage is a place name. The temporal coverage is the first and the last date of the data, separated by a slash.\nWhen the data comes from a published article, add its DOI as well:\nX-schema.org-isBasedOn: https://doi.org/10.2166/wh.2026.173\nThe citation files then cite the article next to the data package, and the metadata records it as the source. Several DOIs are separated by commas.\nRun devtools::document(), devtools::check() and devtools::install() again, then commit and push.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Documenting Your Dataset</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Documenting the data</span>"
     ]
   },
   {
-    "objectID": "data_documentation.html#updating-the-description-file",
-    "href": "data_documentation.html#updating-the-description-file",
-    "title": "3  Documenting Your Dataset",
-    "section": "3.2 Updating the DESCRIPTION File",
-    "text": "3.2 Updating the DESCRIPTION File\nTo complete your package documentation, you’ll need to update the DESCRIPTION file with author information and other key details.\n\n3.2.1 Adding Yourself as an Author\nIn your R console, add yourself as the author and maintainer by running:\n\nusethis::use_author(\n  given = \"Your First Name\", \n  family = \"Your Last Name\", \n  role = c(\"aut\", \"cre\"), \n  email = \"your.email@example.com\",\n  comment = c(ORCID = \"XXXX-XXXX-XXXX-XXXX\")\n)\n\nHere, aut indicates that you are an author, and cre designates you as the creator or maintainer of the package.\n\n\n3.2.2 Documenting Other Contributors\nTo ensure proper credit is given, create a new issue in your GitHub repository titled “Author Information for DESCRIPTION File”. List all contributors, including their full name, email address, role (e.g., aut for authors or ctb for contributors), and ORCID (if applicable).\nFor each additional contributor, run a similar command:\n\nusethis::use_author(given = \"Coauthor First Name\", family = \"Coauthor Last Name\", role = \"aut\")\n\n\n\n3.2.3 Updating the DESCRIPTION File\nAfter adding all contributors, open the DESCRIPTION file in your project and ensure the title and description reflect the purpose of your package accurately. Then, in your R console, run:\n\nupdate_description()\n\nThis will update fields such as version, authors, and dependencies. Review the DESCRIPTION file to make sure all information is accurate.\n\n\n3.2.4 Documentation Check\nTo complete the process, run the following commands again:\n\ndevtools::document()\ndevtools::check()\ndevtools::install()",
+    "objectID": "data_documentation.html#generate-the-metadata",
+    "href": "data_documentation.html#generate-the-metadata",
+    "title": "3  Documenting the data",
+    "section": "3.3 Generate the metadata",
+    "text": "3.3 Generate the metadata\nOne function derives the machine readable metadata of your package from the files you have already written, which are DESCRIPTION, the dictionary, the citation file and the exports in inst/extdata/.\n\nupdate_metadata()\n\nIt writes a schema.org description of the dataset as JSON-LD into pkgdown/templates/in-header.html. The website build in the next chapter embeds it in the head of every page, where dataset search engines such as Google Dataset Search read it. The function ends with the fields it could not fill and where to fill them. Before the release, the DOI is the one field that stays blank.\nNothing in this file is edited by hand. When a value is wrong, change its source and run the function again. Run it again after every change to DESCRIPTION, the dictionary or the exports, and once more after the DOI exists (Chapter 5). A second run with nothing changed writes nothing.\nCommit and push.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Documenting Your Dataset</span>"
-    ]
-  },
-  {
-    "objectID": "data_documentation.html#fair-documentation",
-    "href": "data_documentation.html#fair-documentation",
-    "title": "3  Documenting Your Dataset",
-    "section": "3.3 FAIR Documentation",
-    "text": "3.3 FAIR Documentation\nOne function derives the machine readable metadata of your package from the files you have already written: DESCRIPTION, data-raw/dictionary.csv, CITATION.cff and the exports in inst/extdata. Nothing is edited by hand; when a value is wrong, change its source and run the function again.\n\n3.3.1 Keywords and coverage\nThree facts have no other home, so they live in DESCRIPTION. Open the file and add three lines, with your own values:\nX-schema.org-keywords: sanitation, faecal sludge, Kampala\nX-schema.org-spatialCoverage: Kampala, Uganda\nX-schema.org-temporalCoverage: 2022-03-01/2022-09-30\nThe keywords are a comma separated list. The spatial coverage is a place name. The temporal coverage is the first and the last date of the data, separated by a slash.\n\n\n3.3.2 Generating the metadata\nIn your R console run:\n\nupdate_metadata()\n\nThe function writes a schema.org description of your dataset as JSON-LD into pkgdown/templates/in-header.html. The website build in the next chapter embeds it in the head of every page, where dataset search engines such as Google Dataset Search read it. The function ends with a list of the fields it could not fill and where to fill them.\nRun it again after every change to DESCRIPTION, the dictionary or the exports, and once more after the DOI exists (see Chapter 5). A second run with nothing changed writes nothing.\n\n\n3.3.3 Final Documentation Check\nTo complete the process, run the following commands again:\n\ndevtools::document()\ndevtools::check()\ndevtools::install()\n\nThese steps will ensure your package is fully documented, checked for errors, and ready for use.",
-    "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Documenting Your Dataset</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Documenting the data</span>"
     ]
   },
   {
     "objectID": "data_publication.html",
     "href": "data_publication.html",
-    "title": "4  Publishing Your Dataset",
+    "title": "4  Publishing the data",
     "section": "",
-    "text": "4.1 Creating and Editing the README\nTo start documenting your dataset for publication, you first need to set up a README file.",
+    "text": "4.1 Write the README\nThe package now has data, a dictionary, help pages and metadata. This chapter writes the README that GitHub shows on the repository page and builds the website that presents the dataset.",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Publishing Your Dataset</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Publishing the data</span>"
     ]
   },
   {
-    "objectID": "data_publication.html#creating-and-editing-the-readme",
-    "href": "data_publication.html#creating-and-editing-the-readme",
-    "title": "4  Publishing Your Dataset",
+    "objectID": "data_publication.html#write-the-readme",
+    "href": "data_publication.html#write-the-readme",
+    "title": "4  Publishing the data",
     "section": "",
-    "text": "4.1.1 Initialize the README\nIn your R console, within the project directory, run the following command to create a README file:\n\nsetup_readme()\n\nIf you want the README to include an Example section with a scaffold for a first plot of your data, use this command instead:\n\nsetup_readme(has_example = TRUE)\n\nThe template documents the first data object in data/. When your package holds several, copy the data section once per further object.\n\n\n4.1.2 Editing the README\nLocate the README.Rmd file in your project directory and open it. Edit each section of the README to provide relevant information about your package. Typical sections include:\n\nPackage Name and Brief Description\nInstallation Instructions\nBasic Usage\nFeatures\nExample\n\n\n\n4.1.3 Creating a Data Visualization\nIn the “Example” section of your README, it’s helpful to include at least one plot that showcases your data. The section written by setup_readme(has_example = TRUE) holds a commented scaffold for it. For instance, using ggplot2, you could create a plot like this (adapt it to fit your specific data):\n\nlibrary(ggplot2)\nlibrary(yourpackagename)\n\nggplot(your_data, aes(x = variable1, y = variable2)) +\n  geom_point() +\n  theme_minimal() +\n  labs(title = \"Example Plot from YourPackageName\")\n\n\n\n4.1.4 Building the README\nOnce you’ve completed editing the README, convert it to a Markdown file by running:\n\ndevtools::build_readme()\n\nThis will generate a README.md file, which GitHub displays on your repository’s main page.\n\n\n4.1.5 Updating GitHub\nAfter building the README, go to the “Git” tab in RStudio. Stage the newly created or modified README files, commit them with a message such as “Add and update README,” and push the changes to GitHub.",
+    "text": "4.1.1 Create it from the template\n\nsetup_readme(has_example = TRUE)\n\nwashr writes README.Rmd from its template. The file holds the title and badges, an introduction placeholder, the installation instructions, a download table with one row per dataset and links to the CSV and XLSX exports, a section for the first dataset with its dimensions, a preview and the variable table from the dictionary, an Example section with a scaffold for a first plot, the license, and a citation section that names the version and the DOI in plain text once they exist. Without has_example = TRUE the Example section is left out.\n\n\n4.1.2 Write the text\nOpen README.Rmd and fill in the parts that are yours.\n\nThe introduction. One paragraph of three to five sentences in place of “The goal of … is to”. Say who collected the data, how, when and where, and under which license or permission the source data was shared.\nThe data sentence. Complete “The dataset … contains data about”.\nA block per further dataset. The template documents the first dataset in data/. For each further one, copy the block from its heading to the end of its variable table and replace the dataset name in the heading, in the sentence, in the preview chunk and in the filter of the variable table.\nThe example. The plot code is commented out. Fill in variables of your dataset, write readable axis labels and a title, and uncomment the block together with the library(ggplot2) line. One plot that gives a useful first look at the data is enough. Say in the text what the plot shows.\n\nThe installation instructions, the download table, the dimensions, the previews, the variable tables, the license and the citation are generated. Leave them as they are.\n\n\n4.1.3 Build it\nREADME.md is built from README.Rmd and never edited by hand:\n\ndevtools::build_readme()\n\nThe build loads the packages named in the installation chunk (dplyr, knitr, readr, stringr, gt and kableExtra), so install the ones you are missing when the build stops. Commit both README files and push. GitHub shows README.md on the repository page.",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Publishing Your Dataset</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Publishing the data</span>"
     ]
   },
   {
-    "objectID": "data_publication.html#setting-up-the-package-website",
-    "href": "data_publication.html#setting-up-the-package-website",
-    "title": "4  Publishing Your Dataset",
-    "section": "4.2 Setting Up the Package Website",
-    "text": "4.2 Setting Up the Package Website\nTo enhance your package’s accessibility, you can create a website for it.\n\n4.2.1 Initializing the Website\nRun the following command in your R console:\n\nsetup_website()\n\nThe first run writes _pkgdown.yml from the openwashdata template and builds the site into docs/. Every later run keeps your _pkgdown.yml as it is and rebuilds the site, so there is nothing to answer.\n\n\n4.2.2 Applying the openwashdata brand\nTo give the site the openwashdata fonts and colors, run:\n\nuse_brand()\n\nThis copies the brand file and the logos from the central brand repository into your package and points _pkgdown.yml at them. Run it again whenever the brand changes.\n\n\n4.2.3 Document, Check, and Install the Package\nEnsure your package is up-to-date by running the following commands:\n\ndevtools::document()\ndevtools::check()\ndevtools::install()\n\nThese commands generate the latest documentation, check the package for issues, and install it locally.\n\n\n4.2.4 Preparing for GitHub Pages\nTo host the package website on GitHub Pages, Git has to track the built site. setup_website() removes the docs line from .gitignore for you, so the docs/ folder is tracked. Check that the line is gone before you commit.\n\n\n4.2.5 Updating GitHub with Website Files\nGo to the “Git” tab in RStudio. You should now see new files in the docs/ folder and the updated .gitignore file. Stage these changes, commit them with a message like “Add pkgdown website files,” and push the updates to GitHub.\n\n\n4.2.6 Setting Up GitHub Pages\nTo activate the website, open your GitHub repository in a web browser. Go to “Settings” &gt; “Pages.” Under “Source,” select the branch where your docs/ folder resides (usually “main” or “master”) and set the folder to /docs. Finally, click “Save.”\nYour package website will now be live at https://yourusername.github.io/yourrepositoryname/.\nRemember, if you make significant changes to your package or documentation, you may need to rebuild the website by running pkgdown::build_site() and pushing the updated docs/ folder to GitHub.",
+    "objectID": "data_publication.html#build-the-website",
+    "href": "data_publication.html#build-the-website",
+    "title": "4  Publishing the data",
+    "section": "4.2 Build the website",
+    "text": "4.2 Build the website\nThe website is built by pkgdown from the README, the help pages and the metadata. The review standard has it deployed by a GitHub Actions workflow to the gh-pages branch of the repository, so that the built site is never committed and never goes stale. Set up the workflow first, then let washr write the configuration and build.\n\n4.2.1 Add the deployment workflow\n\nusethis::use_github_action(\"pkgdown\")\n\nThe call writes the workflow .github/workflows/pkgdown.yaml. It runs on every push to the main branch, builds the site and writes it to the gh-pages branch. Nothing else changes yet.\n\n\n4.2.2 Write the configuration and build the site\n\nsetup_website()\n\nThe first run writes _pkgdown.yml from the washr template, with the address of the site, the analytics header, the funding sentence in the sidebar and a reference index with one entry per dataset. Every value comes from DESCRIPTION. Then it builds the site into docs/, which takes a minute. Because the deployment workflow exists, docs/ stays in .gitignore, and the local build is a preview. Open docs/index.html in a browser to see it. Every later run keeps _pkgdown.yml as it is and rebuilds the site.\npkgdown expects the address of the site in DESCRIPTION as well, next to the repository URL. Add it, with the value of the url line of _pkgdown.yml:\n\ndesc::desc_add_urls(\"https://openwashdata.github.io/yourpackagename\")\n\n\n\n\n\n\n\nNote\n\n\n\nA repository that cannot run GitHub Actions can serve the site from the main branch instead. Skip the workflow and run setup_website(). Without a workflow it removes docs from .gitignore, so that the built site is committed. In the Pages settings of the repository, choose the main branch and the /docs folder as the source. The review standard prefers the workflow, because a committed site is only as current as its last build.\n\n\n\n\n4.2.3 Apply the brand\n\nuse_brand()\n\nThis copies the brand file and the logos of the openwashdata brand from the latest release of the brand repository into your package, adds them to .Rbuildignore, wires _pkgdown.yml to them and records the release in DESCRIPTION. The site now uses the openwashdata fonts and colours. Run it again after a new brand release. A run with no new release changes nothing. For a package under another organisation, the Config/washr/brand-source field in DESCRIPTION names the brand repository to copy from, or none.\n\n\n4.2.4 Check, commit and publish\nRun devtools::document(), devtools::check() and devtools::install() once more, then commit everything and push. The push starts the pkgdown workflow on GitHub, which builds the site and writes it to the gh-pages branch. The branch appears with the first run, after a few minutes.\nThen open the repository on GitHub, go to “Settings” and “Pages”, and under “Build and deployment” choose “Deploy from a branch”, with the gh-pages branch and the root folder as the source. The site is live at the address in _pkgdown.yml a minute later, and every later push rebuilds it.\nReports about the package in the openwashdata look, as PDF or Word documents, use the quarto-owd Quarto extension. It reads the brand file that use_brand() installed.",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Publishing Your Dataset</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Publishing the data</span>"
     ]
   },
   {
     "objectID": "creating_doi.html",
     "href": "creating_doi.html",
-    "title": "5  Creating a DOI and connecting it to GitHub",
+    "title": "5  Creating a release and a DOI",
     "section": "",
-    "text": "5.1 Setting Up Your Repository on Zenodo\nThis chapter guides you through the process of creating a Digital Object Identifier (DOI) and connecting it to your GitHub repository.\nBegin by accessing your Zenodo account through your GitHub credentials. Once logged in, you’ll need to establish the connection between Zenodo and your GitHub repository. To do so, navigate to the settings by clicking the dropdown menu next to your email address in the top right corner and select “GitHub” from the options.\nYou’ll see a list of your GitHub repositories. Locate the repository you want to publish and activate it by flipping the switch to “ON”. Click on the repository link to access its settings. This connection allows Zenodo to track your repository’s releases and create corresponding archives.",
+    "text": "5.1 Write the citation files\nA Digital Object Identifier (DOI) makes the dataset citable. It points at a fixed version of the data in an archive that outlives the repository. Zenodo assigns one for every release of a GitHub repository it watches. This chapter writes the citation files, checks that the package is ready, creates the release and brings the DOI back into the package.\nupdate_citation()\nThe call writes three files from DESCRIPTION. CITATION.cff is what GitHub reads for its “Cite this repository” button. inst/CITATION is what citation(\"yourpackagename\") prints in R. .zenodo.json is what Zenodo reads when it archives a release. From that file Zenodo takes the resource type (Dataset), the openwashdata community, the creators with their ORCID iDs, the license and the keywords, so that the record needs no edits by hand. When DESCRIPTION names a source article in X-schema.org-isBasedOn, the citation files cite it next to the data package.\nCommit the three files and push. Zenodo reads .zenodo.json from the release, so it has to be in the repository before the release is created.",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Creating a DOI and connecting it to GitHub</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Creating a release and a DOI</span>"
     ]
   },
   {
-    "objectID": "creating_doi.html#setting-up-your-repository-on-zenodo",
-    "href": "creating_doi.html#setting-up-your-repository-on-zenodo",
-    "title": "5  Creating a DOI and connecting it to GitHub",
-    "section": "",
-    "text": "5.1.1 Creating Your First Release\nWith the connection established, return to GitHub and create your initial release. Label it as version 0.0.1 and mark it as the “initial package release”. This triggers Zenodo to create an archive of your repository. Return to the Zenodo GitHub settings page to obtain your DOI badge, which you’ll need for documentation.\n\n\n5.1.2 Configuring Your Zenodo Entry\nOpen your entry on Zenodo and click the “Edit” button. You’ll need to make several important modifications to ensure your package is properly categorized and accessible:\n\nLocate the “Additional Notes” section and replace any existing text with a link to your GitHub pages website.\nAdjust the upload type from “Software” to “Dataset” to properly categorize your submission. Under “Related identifiers”, remove the current release link entry and add your GitHub pages URL, specifying that it “is compiled/created by this upload” and categorizing it as a Dataset.",
+    "objectID": "creating_doi.html#check-that-the-package-is-ready",
+    "href": "creating_doi.html#check-that-the-package-is-ready",
+    "title": "5  Creating a release and a DOI",
+    "section": "5.2 Check that the package is ready",
+    "text": "5.2 Check that the package is ready\n\ncheck_publication_readiness()\n\nThe function reads the package and reports, item by item, what is in place and what is missing. It covers the metadata, the dictionary, the documentation, the citation files and the check workflow, and for every gap it names the step that closes it. It writes nothing, so run it as often as you like, and go back to the chapter it points to until no item fails. Before the first release, the DOI is the one expected gap.",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Creating a DOI and connecting it to GitHub</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Creating a release and a DOI</span>"
     ]
   },
   {
-    "objectID": "creating_doi.html#documentation-updates-in-rstudio",
-    "href": "creating_doi.html#documentation-updates-in-rstudio",
-    "title": "5  Creating a DOI and connecting it to GitHub",
-    "section": "5.2 Documentation Updates in RStudio",
-    "text": "5.2 Documentation Updates in RStudio\nAfter configuring Zenodo, switch to RStudio. Update the version number in your DESCRIPTION file so it matches the release. Then write the DOI into the citation files (CITATION.cff and inst/CITATION) and the README with one call, using the DOI shown on your Zenodo entry:\n\nupdate_citation(doi = \"10.5281/zenodo.11185699\")\n\nThe function regenerates both citation files from DESCRIPTION, adds the DOI badge to README.Rmd, rebuilds README.md, and rebuilds the website in docs/ when it exists. Commit and push the changed files.",
+    "objectID": "creating_doi.html#connect-the-repository-to-zenodo",
+    "href": "creating_doi.html#connect-the-repository-to-zenodo",
+    "title": "5  Creating a release and a DOI",
+    "section": "5.3 Connect the repository to Zenodo",
+    "text": "5.3 Connect the repository to Zenodo\nLog in to Zenodo with your GitHub account. Open the menu next to your email address in the top right corner, choose “GitHub”, find your repository in the list and flip its switch to “ON”. From now on Zenodo archives every release of the repository. Each release gets its own version DOI, and the record carries one concept DOI that always resolves to the latest version.",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Creating a DOI and connecting it to GitHub</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Creating a release and a DOI</span>"
+    ]
+  },
+  {
+    "objectID": "creating_doi.html#create-the-release",
+    "href": "creating_doi.html#create-the-release",
+    "title": "5  Creating a release and a DOI",
+    "section": "5.4 Create the release",
+    "text": "5.4 Create the release\nSet Version in DESCRIPTION to the version you release, for example 1.0.0 for the first publication. Run update_citation() once more, so that the citation files carry the version, and devtools::build_readme(), so that the README names it. Commit and push.\nOn GitHub, open the repository, click “Releases” and “Draft a new release”. Create a tag with the version and a v in front, such as v1.0.0, give the release the same name and a short description, and publish it. Zenodo picks the release up and creates the archive. This can take up to an hour. The DOIs then appear on the record and on your Zenodo GitHub page.\nOpen the record on Zenodo and check it. The resource type is Dataset, the community is openwashdata, the creators and the license are right. All of this came from .zenodo.json. If something is wrong, fix it in DESCRIPTION, run update_citation() again for the next release, and correct the record once in the Zenodo editor.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Creating a release and a DOI</span>"
+    ]
+  },
+  {
+    "objectID": "creating_doi.html#bring-the-doi-into-the-package",
+    "href": "creating_doi.html#bring-the-doi-into-the-package",
+    "title": "5  Creating a release and a DOI",
+    "section": "5.5 Bring the DOI into the package",
+    "text": "5.5 Bring the DOI into the package\nUse the concept DOI, the one Zenodo shows under “Cite all versions”. It stays the same across releases, so a citation always resolves to the latest version, while the version in the citation file says which one was used. Back in RStudio, write it into the citation files, the README and the metadata with two calls:\n\nupdate_citation(doi = \"10.5281/zenodo.11185699\")\nupdate_metadata()\n\nupdate_citation() regenerates the citation files with the DOI, adds the DOI badge to README.Rmd and rebuilds README.md. update_metadata() carries the DOI into the JSON-LD of the site. Run check_publication_readiness() once more, then commit the changed files and push. The pkgdown workflow rebuilds the site, and the citation in the README and on the website now shows how to cite the dataset.\nA package with a Zenodo DOI appears in the openwashdata data catalogue within a week.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Creating a release and a DOI</span>"
+    ]
+  },
+  {
+    "objectID": "creating_doi.html#later-versions",
+    "href": "creating_doi.html#later-versions",
+    "title": "5  Creating a release and a DOI",
+    "section": "5.6 Later versions",
+    "text": "5.6 Later versions\nWhen the data or the documentation changes after publication, raise the version in DESCRIPTION, run the steps of this chapter again and create a new release. Zenodo archives the new version under a new version DOI, and the concept DOI keeps resolving to the latest one. The download links in the README point at the release tag of the version in DESCRIPTION, so that a citation of a version leads to the same files later.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Creating a release and a DOI</span>"
     ]
   },
   {
     "objectID": "creating_doi.html#eth-research-collection-submission",
     "href": "creating_doi.html#eth-research-collection-submission",
-    "title": "5  Creating a DOI and connecting it to GitHub",
-    "section": "5.3 ETH Research Collection Submission",
-    "text": "5.3 ETH Research Collection Submission\n\n\n\n\n\n\nNote\n\n\n\nThis section applies only to GHE workflow submissions\n\n\nFor submissions to the ETH Research Collection, navigate to the research data section and select “dataset” as your submission type. Under organizational unit, select “tilley”, and set your license to “Creative Commons Attribution 4.0 International”. These settings ensure your submission aligns with institutional requirements and makes your data openly accessible while protecting your rights as the creator.",
+    "title": "5  Creating a release and a DOI",
+    "section": "5.7 ETH Research Collection submission",
+    "text": "5.7 ETH Research Collection submission\n\n\n\n\n\n\nNote\n\n\n\nThis section applies only to researchers at Global Health Engineering, ETH Zurich.\n\n\nFor a submission to the ETH Research Collection, go to the research data section and choose “dataset” as the submission type. Under organisational unit, select “tilley”, and set the license to “Creative Commons Attribution 4.0 International”. These settings match the data package and keep the data open while protecting your rights as the creator.",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Creating a DOI and connecting it to GitHub</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Creating a release and a DOI</span>"
     ]
   },
   {
@@ -154,17 +254,47 @@
     "href": "troubleshooting.html",
     "title": "6  Troubleshooting",
     "section": "",
-    "text": "6.1 Git fails when pushing commit to github\nAlthough we try to make this guide as detailed as possible, unfortunately we cannot account for all eventualities. That’s why we’ve compiled a list of common issues (and solutions) here.\nIf you want to push large files (e.g. raw datasets) to GitHub, Git may fail. A simple workaround is to increase the buffer size. You can do this with the following line in the terminal. Note that you need to be in the working directory of your project.",
+    "text": "6.1 Start with the readiness report\nThis guide cannot cover every situation. The problems below have come up more than once, with what fixed them. If you run into one that is missing, please open an issue in the source repository.\ncheck_publication_readiness() reads the package and names, for every item that fails, the step that closes it. Run it first whenever a later step stops with a message about a missing file.",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Troubleshooting</span>"
     ]
   },
   {
-    "objectID": "troubleshooting.html#git-fails-when-pushing-commit-to-github",
-    "href": "troubleshooting.html#git-fails-when-pushing-commit-to-github",
+    "objectID": "troubleshooting.html#setup_dictionary-stops-because-the-dictionary-exists",
+    "href": "troubleshooting.html#setup_dictionary-stops-because-the-dictionary-exists",
     "title": "6  Troubleshooting",
-    "section": "",
-    "text": "git config http.postBuffer 524288000",
+    "section": "6.2 setup_dictionary() stops because the dictionary exists",
+    "text": "6.2 setup_dictionary() stops because the dictionary exists\nRun update_dictionary() instead. It brings the dictionary in line with the data and keeps every description you wrote (Chapter 2).",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Troubleshooting</span>"
+    ]
+  },
+  {
+    "objectID": "troubleshooting.html#setup_website-stops-because-readme.md-is-missing",
+    "href": "troubleshooting.html#setup_website-stops-because-readme.md-is-missing",
+    "title": "6  Troubleshooting",
+    "section": "6.3 setup_website() stops because README.md is missing",
+    "text": "6.3 setup_website() stops because README.md is missing\nThe website is built from the README. Run setup_readme() and devtools::build_readme() first (Chapter 4).",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Troubleshooting</span>"
+    ]
+  },
+  {
+    "objectID": "troubleshooting.html#pkgdown-reports-urls-not-ok",
+    "href": "troubleshooting.html#pkgdown-reports-urls-not-ok",
+    "title": "6  Troubleshooting",
+    "section": "6.4 pkgdown reports “URLs not ok”",
+    "text": "6.4 pkgdown reports “URLs not ok”\nThe address of the site is missing from DESCRIPTION. Add it with desc::desc_add_urls() and the value of the url line of _pkgdown.yml, then build again (Chapter 4).",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Troubleshooting</span>"
+    ]
+  },
+  {
+    "objectID": "troubleshooting.html#git-fails-when-pushing-large-files",
+    "href": "troubleshooting.html#git-fails-when-pushing-large-files",
+    "title": "6  Troubleshooting",
+    "section": "6.5 Git fails when pushing large files",
+    "text": "6.5 Git fails when pushing large files\nWhen you push large files such as raw datasets, Git may fail. Raise the buffer size with the following line in the Terminal, from the folder of your project:\ngit config http.postBuffer 524288000",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Troubleshooting</span>"
     ]
@@ -173,8 +303,8 @@
     "objectID": "troubleshooting.html#r-cmd-check",
     "href": "troubleshooting.html#r-cmd-check",
     "title": "6  Troubleshooting",
-    "section": "6.2 R CMD CHECK",
-    "text": "6.2 R CMD CHECK\nDuring the publication process, you might encounter several common issues when running R CMD CHECK. Here’s how to address them:\nIf you receive a “unable to verify current time” error, this typically relates to your system’s time synchronization. You can find a detailed solution in the Stack Overflow discussion addressing this specific issue.\nAnother common issue is the “Non-standard files/directories found at top level” warning. This occurs when your package contains files that R doesn’t expect in the root directory. While this warning doesn’t prevent your package from working, you can resolve it by following the guidance provided in this Stack Overflow thread.\nRemember to verify all URLs and steps before beginning the process, as platforms occasionally update their interfaces and requirements. If you encounter any issues not covered in this manual, consult the respective platform’s documentation or reach out to their support teams. By following these steps carefully, your data package is properly documented, citeable, and accessible to the research community.",
+    "section": "6.6 R CMD check",
+    "text": "6.6 R CMD check\nA few messages from devtools::check() come up again and again.\n“unable to verify current time” relates to the time synchronisation of your computer. This Stack Overflow answer has the fix.\n“Non-standard files/directories found at top level” means that the package root holds files R does not expect there. The fix is to list them in .Rbuildignore, as this Stack Overflow thread explains. The washr functions add their own files to .Rbuildignore, so this message points at a file you added.\nPlatforms change their interfaces from time to time, so a button or a menu named in this guide may have moved. The documentation of the platform is the place to look then.",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Troubleshooting</span>"
     ]

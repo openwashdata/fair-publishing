@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5&nbsp; Creating a DOI and connecting it to GitHub – Data Publishing with `washr`</title>
+<title>5&nbsp; Creating a release and a DOI – FAIR Data Publishing</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -124,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./creating_doi.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Creating a DOI and connecting it to GitHub</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./creating_doi.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Creating a release and a DOI</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -139,10 +139,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Data Publishing with <code>washr</code></a> 
+      <a href="./">FAIR Data Publishing</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/Global-Health-Engineering/ghedatapublishing" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <a href="./Data-Publishing-with-`washr`.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="https://github.com/openwashdata/fair-publishing" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./fair-data-publishing.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -179,31 +179,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./creating_repo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Creating a repository</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Creating the package and its repository</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data_preparation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preparing your dataset</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preparing the data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data_documentation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Documenting Your Dataset</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Documenting the data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data_publication.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Publishing Your Dataset</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Publishing the data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./creating_doi.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Creating a DOI and connecting it to GitHub</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Creating a release and a DOI</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -222,22 +222,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#setting-up-your-repository-on-zenodo" id="toc-setting-up-your-repository-on-zenodo" class="nav-link active" data-scroll-target="#setting-up-your-repository-on-zenodo"><span class="header-section-number">5.1</span> Setting Up Your Repository on Zenodo</a>
-  <ul class="collapse">
-  <li><a href="#creating-your-first-release" id="toc-creating-your-first-release" class="nav-link" data-scroll-target="#creating-your-first-release"><span class="header-section-number">5.1.1</span> Creating Your First Release</a></li>
-  <li><a href="#configuring-your-zenodo-entry" id="toc-configuring-your-zenodo-entry" class="nav-link" data-scroll-target="#configuring-your-zenodo-entry"><span class="header-section-number">5.1.2</span> Configuring Your Zenodo Entry</a></li>
-  </ul></li>
-  <li><a href="#documentation-updates-in-rstudio" id="toc-documentation-updates-in-rstudio" class="nav-link" data-scroll-target="#documentation-updates-in-rstudio"><span class="header-section-number">5.2</span> Documentation Updates in RStudio</a></li>
-  <li><a href="#eth-research-collection-submission" id="toc-eth-research-collection-submission" class="nav-link" data-scroll-target="#eth-research-collection-submission"><span class="header-section-number">5.3</span> ETH Research Collection Submission</a></li>
+  <li><a href="#write-the-citation-files" id="toc-write-the-citation-files" class="nav-link active" data-scroll-target="#write-the-citation-files"><span class="header-section-number">5.1</span> Write the citation files</a></li>
+  <li><a href="#check-that-the-package-is-ready" id="toc-check-that-the-package-is-ready" class="nav-link" data-scroll-target="#check-that-the-package-is-ready"><span class="header-section-number">5.2</span> Check that the package is ready</a></li>
+  <li><a href="#connect-the-repository-to-zenodo" id="toc-connect-the-repository-to-zenodo" class="nav-link" data-scroll-target="#connect-the-repository-to-zenodo"><span class="header-section-number">5.3</span> Connect the repository to Zenodo</a></li>
+  <li><a href="#create-the-release" id="toc-create-the-release" class="nav-link" data-scroll-target="#create-the-release"><span class="header-section-number">5.4</span> Create the release</a></li>
+  <li><a href="#bring-the-doi-into-the-package" id="toc-bring-the-doi-into-the-package" class="nav-link" data-scroll-target="#bring-the-doi-into-the-package"><span class="header-section-number">5.5</span> Bring the DOI into the package</a></li>
+  <li><a href="#later-versions" id="toc-later-versions" class="nav-link" data-scroll-target="#later-versions"><span class="header-section-number">5.6</span> Later versions</a></li>
+  <li><a href="#eth-research-collection-submission" id="toc-eth-research-collection-submission" class="nav-link" data-scroll-target="#eth-research-collection-submission"><span class="header-section-number">5.7</span> ETH Research Collection submission</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Global-Health-Engineering/ghedatapublishing/edit/main/creating_doi.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Global-Health-Engineering/ghedatapublishing/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/openwashdata/fair-publishing/edit/main/creating_doi.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openwashdata/fair-publishing/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-doi" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Creating a DOI and connecting it to GitHub</span></span></h1>
+<h1 class="title"><span id="sec-doi" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Creating a release and a DOI</span></span></h1>
 </div>
 
 
@@ -254,34 +254,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>This chapter guides you through the process of creating a Digital Object Identifier (DOI) and connecting it to your GitHub repository.</p>
-<section id="setting-up-your-repository-on-zenodo" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="setting-up-your-repository-on-zenodo"><span class="header-section-number">5.1</span> Setting Up Your Repository on Zenodo</h2>
-<p>Begin by accessing your <a href="https://zenodo.org/">Zenodo</a> account through your GitHub credentials. Once logged in, you’ll need to establish the connection between Zenodo and your GitHub repository. To do so, navigate to the settings by clicking the dropdown menu next to your email address in the top right corner and select “GitHub” from the options.</p>
-<p>You’ll see a list of your GitHub repositories. Locate the repository you want to publish and activate it by flipping the switch to “ON”. Click on the repository link to access its settings. This connection allows Zenodo to track your repository’s releases and create corresponding archives.</p>
-<section id="creating-your-first-release" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1" class="anchored" data-anchor-id="creating-your-first-release"><span class="header-section-number">5.1.1</span> Creating Your First Release</h3>
-<p>With the connection established, return to GitHub and create your initial release. Label it as version 0.0.1 and mark it as the “initial package release”. This triggers Zenodo to create an archive of your repository. Return to the Zenodo GitHub settings page to obtain your DOI badge, which you’ll need for documentation.</p>
-</section>
-<section id="configuring-your-zenodo-entry" class="level3" data-number="5.1.2">
-<h3 data-number="5.1.2" class="anchored" data-anchor-id="configuring-your-zenodo-entry"><span class="header-section-number">5.1.2</span> Configuring Your Zenodo Entry</h3>
-<p>Open your entry on Zenodo and click the “Edit” button. You’ll need to make several important modifications to ensure your package is properly categorized and accessible:</p>
-<ol type="1">
-<li>Locate the “Additional Notes” section and replace any existing text with a link to your GitHub pages website.</li>
-<li>Adjust the upload type from “Software” to “Dataset” to properly categorize your submission. Under “Related identifiers”, remove the current release link entry and add your GitHub pages URL, specifying that it “is compiled/created by this upload” and categorizing it as a Dataset.</li>
-</ol>
-</section>
-</section>
-<section id="documentation-updates-in-rstudio" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="documentation-updates-in-rstudio"><span class="header-section-number">5.2</span> Documentation Updates in RStudio</h2>
-<p>After configuring Zenodo, switch to RStudio. Update the version number in your DESCRIPTION file so it matches the release. Then write the DOI into the citation files (<code>CITATION.cff</code> and <code>inst/CITATION</code>) and the README with one call, using the DOI shown on your Zenodo entry:</p>
+<p>A Digital Object Identifier (DOI) makes the dataset citable. It points at a fixed version of the data in an archive that outlives the repository. <a href="https://zenodo.org/">Zenodo</a> assigns one for every release of a GitHub repository it watches. This chapter writes the citation files, checks that the package is ready, creates the release and brings the DOI back into the package.</p>
+<section id="write-the-citation-files" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="write-the-citation-files"><span class="header-section-number">5.1</span> Write the citation files</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">update_citation</span>(<span class="at">doi =</span> <span class="st">"10.5281/zenodo.11185699"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">update_citation</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>The function regenerates both citation files from DESCRIPTION, adds the DOI badge to <code>README.Rmd</code>, rebuilds <code>README.md</code>, and rebuilds the website in <code>docs/</code> when it exists. Commit and push the changed files.</p>
+<p>The call writes three files from <code>DESCRIPTION</code>. <code>CITATION.cff</code> is what GitHub reads for its “Cite this repository” button. <code>inst/CITATION</code> is what <code>citation("yourpackagename")</code> prints in R. <code>.zenodo.json</code> is what Zenodo reads when it archives a release. From that file Zenodo takes the resource type (Dataset), the openwashdata community, the creators with their ORCID iDs, the license and the keywords, so that the record needs no edits by hand. When <code>DESCRIPTION</code> names a source article in <code>X-schema.org-isBasedOn</code>, the citation files cite it next to the data package.</p>
+<p>Commit the three files and push. Zenodo reads <code>.zenodo.json</code> from the release, so it has to be in the repository before the release is created.</p>
 </section>
-<section id="eth-research-collection-submission" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="eth-research-collection-submission"><span class="header-section-number">5.3</span> ETH Research Collection Submission</h2>
+<section id="check-that-the-package-is-ready" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="check-that-the-package-is-ready"><span class="header-section-number">5.2</span> Check that the package is ready</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_publication_readiness</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The function reads the package and reports, item by item, what is in place and what is missing. It covers the metadata, the dictionary, the documentation, the citation files and the check workflow, and for every gap it names the step that closes it. It writes nothing, so run it as often as you like, and go back to the chapter it points to until no item fails. Before the first release, the DOI is the one expected gap.</p>
+</section>
+<section id="connect-the-repository-to-zenodo" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="connect-the-repository-to-zenodo"><span class="header-section-number">5.3</span> Connect the repository to Zenodo</h2>
+<p>Log in to <a href="https://zenodo.org/">Zenodo</a> with your GitHub account. Open the menu next to your email address in the top right corner, choose “GitHub”, find your repository in the list and flip its switch to “ON”. From now on Zenodo archives every release of the repository. Each release gets its own version DOI, and the record carries one concept DOI that always resolves to the latest version.</p>
+</section>
+<section id="create-the-release" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="create-the-release"><span class="header-section-number">5.4</span> Create the release</h2>
+<p>Set <code>Version</code> in <code>DESCRIPTION</code> to the version you release, for example <code>1.0.0</code> for the first publication. Run <code>update_citation()</code> once more, so that the citation files carry the version, and <code>devtools::build_readme()</code>, so that the README names it. Commit and push.</p>
+<p>On GitHub, open the repository, click “Releases” and “Draft a new release”. Create a tag with the version and a <code>v</code> in front, such as <code>v1.0.0</code>, give the release the same name and a short description, and publish it. Zenodo picks the release up and creates the archive. This can take up to an hour. The DOIs then appear on the record and on your Zenodo GitHub page.</p>
+<p>Open the record on Zenodo and check it. The resource type is Dataset, the community is openwashdata, the creators and the license are right. All of this came from <code>.zenodo.json</code>. If something is wrong, fix it in <code>DESCRIPTION</code>, run <code>update_citation()</code> again for the next release, and correct the record once in the Zenodo editor.</p>
+</section>
+<section id="bring-the-doi-into-the-package" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="bring-the-doi-into-the-package"><span class="header-section-number">5.5</span> Bring the DOI into the package</h2>
+<p>Use the concept DOI, the one Zenodo shows under “Cite all versions”. It stays the same across releases, so a citation always resolves to the latest version, while the version in the citation file says which one was used. Back in RStudio, write it into the citation files, the README and the metadata with two calls:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">update_citation</span>(<span class="at">doi =</span> <span class="st">"10.5281/zenodo.11185699"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">update_metadata</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code>update_citation()</code> regenerates the citation files with the DOI, adds the DOI badge to <code>README.Rmd</code> and rebuilds <code>README.md</code>. <code>update_metadata()</code> carries the DOI into the JSON-LD of the site. Run <code>check_publication_readiness()</code> once more, then commit the changed files and push. The pkgdown workflow rebuilds the site, and the citation in the README and on the website now shows how to cite the dataset.</p>
+<p>A package with a Zenodo DOI appears in the <a href="https://openwashdata.org/pages/gallery/data/">openwashdata data catalogue</a> within a week.</p>
+</section>
+<section id="later-versions" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="later-versions"><span class="header-section-number">5.6</span> Later versions</h2>
+<p>When the data or the documentation changes after publication, raise the version in <code>DESCRIPTION</code>, run the steps of this chapter again and create a new release. Zenodo archives the new version under a new version DOI, and the concept DOI keeps resolving to the latest one. The download links in the README point at the release tag of the version in <code>DESCRIPTION</code>, so that a citation of a version leads to the same files later.</p>
+</section>
+<section id="eth-research-collection-submission" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="eth-research-collection-submission"><span class="header-section-number">5.7</span> ETH Research Collection submission</h2>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -292,10 +306,10 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This section applies only to GHE workflow submissions</p>
+<p>This section applies only to researchers at Global Health Engineering, ETH Zurich.</p>
 </div>
 </div>
-<p>For submissions to the ETH Research Collection, navigate to the research data section and select “dataset” as your submission type. Under organizational unit, select “tilley”, and set your license to “Creative Commons Attribution 4.0 International”. These settings ensure your submission aligns with institutional requirements and makes your data openly accessible while protecting your rights as the creator.</p>
+<p>For a submission to the <a href="https://www.research-collection.ethz.ch/">ETH Research Collection</a>, go to the research data section and choose “dataset” as the submission type. Under organisational unit, select “tilley”, and set the license to “Creative Commons Attribution 4.0 International”. These settings match the data package and keep the data open while protecting your rights as the creator.</p>
 
 
 </section>
@@ -374,7 +388,7 @@ Note
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/global-health-engineering\.github\.io\/ghedatapublishing\/");
+        var filterRegex = new RegExp("https:\/\/openwashdata\.github\.io\/fair-publishing\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -703,8 +717,8 @@ Note
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./data_publication.html" class="pagination-link" aria-label="Publishing Your Dataset">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Publishing Your Dataset</span></span>
+      <a href="./data_publication.html" class="pagination-link" aria-label="Publishing the data">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Publishing the data</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
@@ -717,11 +731,11 @@ Note
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Data Publishing with <code>washr</code> was written by the <a href="https://openwashdata.org/about#team"> Open Science Team </a> at <a href="https://ghe.ethz.ch/"> GHE </a></p>
+<p>FAIR Data Publishing is maintained by the <a href="https://openwashdata.org/about#team">openwashdata team</a> at <a href="https://ghe.ethz.ch/">Global Health Engineering</a>, ETH Zurich</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Global-Health-Engineering/ghedatapublishing/edit/main/creating_doi.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Global-Health-Engineering/ghedatapublishing/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openwashdata/fair-publishing/edit/main/creating_doi.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openwashdata/fair-publishing/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
 </div>

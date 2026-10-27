@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; Documenting Your Dataset – Data Publishing with `washr`</title>
+<title>3&nbsp; Documenting the data – FAIR Data Publishing</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -124,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data_documentation.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Documenting Your Dataset</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data_documentation.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Documenting the data</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -139,10 +139,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Data Publishing with <code>washr</code></a> 
+      <a href="./">FAIR Data Publishing</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/Global-Health-Engineering/ghedatapublishing" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <a href="./Data-Publishing-with-`washr`.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="https://github.com/openwashdata/fair-publishing" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./fair-data-publishing.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -179,31 +179,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./creating_repo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Creating a repository</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Creating the package and its repository</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data_preparation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preparing your dataset</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preparing the data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data_documentation.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Documenting Your Dataset</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Documenting the data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data_publication.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Publishing Your Dataset</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Publishing the data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./creating_doi.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Creating a DOI and connecting it to GitHub</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Creating a release and a DOI</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -222,34 +222,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#setting-up-and-writing-documentation-with-roxygen" id="toc-setting-up-and-writing-documentation-with-roxygen" class="nav-link active" data-scroll-target="#setting-up-and-writing-documentation-with-roxygen"><span class="header-section-number">3.1</span> Setting Up and Writing Documentation with Roxygen</a>
+  <li><a href="#write-the-help-pages" id="toc-write-the-help-pages" class="nav-link active" data-scroll-target="#write-the-help-pages"><span class="header-section-number">3.1</span> Write the help pages</a></li>
+  <li><a href="#complete-the-description-file" id="toc-complete-the-description-file" class="nav-link" data-scroll-target="#complete-the-description-file"><span class="header-section-number">3.2</span> Complete the DESCRIPTION file</a>
   <ul class="collapse">
-  <li><a href="#writing-documentation" id="toc-writing-documentation" class="nav-link" data-scroll-target="#writing-documentation"><span class="header-section-number">3.1.1</span> Writing Documentation</a></li>
-  <li><a href="#updating-your-github-repository" id="toc-updating-your-github-repository" class="nav-link" data-scroll-target="#updating-your-github-repository"><span class="header-section-number">3.1.2</span> Updating Your GitHub Repository</a></li>
-  <li><a href="#finalizing-and-installing-the-documentation" id="toc-finalizing-and-installing-the-documentation" class="nav-link" data-scroll-target="#finalizing-and-installing-the-documentation"><span class="header-section-number">3.1.3</span> Finalizing and Installing the Documentation</a></li>
+  <li><a href="#authors" id="toc-authors" class="nav-link" data-scroll-target="#authors"><span class="header-section-number">3.2.1</span> Authors</a></li>
+  <li><a href="#the-fields-washr-writes" id="toc-the-fields-washr-writes" class="nav-link" data-scroll-target="#the-fields-washr-writes"><span class="header-section-number">3.2.2</span> The fields washr writes</a></li>
+  <li><a href="#keywords-coverage-and-source" id="toc-keywords-coverage-and-source" class="nav-link" data-scroll-target="#keywords-coverage-and-source"><span class="header-section-number">3.2.3</span> Keywords, coverage and source</a></li>
   </ul></li>
-  <li><a href="#updating-the-description-file" id="toc-updating-the-description-file" class="nav-link" data-scroll-target="#updating-the-description-file"><span class="header-section-number">3.2</span> Updating the DESCRIPTION File</a>
-  <ul class="collapse">
-  <li><a href="#adding-yourself-as-an-author" id="toc-adding-yourself-as-an-author" class="nav-link" data-scroll-target="#adding-yourself-as-an-author"><span class="header-section-number">3.2.1</span> Adding Yourself as an Author</a></li>
-  <li><a href="#documenting-other-contributors" id="toc-documenting-other-contributors" class="nav-link" data-scroll-target="#documenting-other-contributors"><span class="header-section-number">3.2.2</span> Documenting Other Contributors</a></li>
-  <li><a href="#updating-the-description-file-1" id="toc-updating-the-description-file-1" class="nav-link" data-scroll-target="#updating-the-description-file-1"><span class="header-section-number">3.2.3</span> Updating the DESCRIPTION File</a></li>
-  <li><a href="#documentation-check" id="toc-documentation-check" class="nav-link" data-scroll-target="#documentation-check"><span class="header-section-number">3.2.4</span> Documentation Check</a></li>
-  </ul></li>
-  <li><a href="#fair-documentation" id="toc-fair-documentation" class="nav-link" data-scroll-target="#fair-documentation"><span class="header-section-number">3.3</span> FAIR Documentation</a>
-  <ul class="collapse">
-  <li><a href="#keywords-and-coverage" id="toc-keywords-and-coverage" class="nav-link" data-scroll-target="#keywords-and-coverage"><span class="header-section-number">3.3.1</span> Keywords and coverage</a></li>
-  <li><a href="#generating-the-metadata" id="toc-generating-the-metadata" class="nav-link" data-scroll-target="#generating-the-metadata"><span class="header-section-number">3.3.2</span> Generating the metadata</a></li>
-  <li><a href="#final-documentation-check" id="toc-final-documentation-check" class="nav-link" data-scroll-target="#final-documentation-check"><span class="header-section-number">3.3.3</span> Final Documentation Check</a></li>
-  </ul></li>
+  <li><a href="#generate-the-metadata" id="toc-generate-the-metadata" class="nav-link" data-scroll-target="#generate-the-metadata"><span class="header-section-number">3.3</span> Generate the metadata</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Global-Health-Engineering/ghedatapublishing/edit/main/data_documentation.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Global-Health-Engineering/ghedatapublishing/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/openwashdata/fair-publishing/edit/main/data_documentation.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openwashdata/fair-publishing/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-datadocumentation" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Documenting Your Dataset</span></span></h1>
+<h1 class="title"><span id="sec-datadocumentation" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Documenting the data</span></span></h1>
 </div>
 
 
@@ -266,126 +255,75 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>In the next steps, the goal is to document not only the dataset itself but also the functions and the package as a whole. The individual steps are visualized in the figure below.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/documenting.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="border: 1px solid black;"></p>
-</figure>
-</div>
-<section id="setting-up-and-writing-documentation-with-roxygen" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="setting-up-and-writing-documentation-with-roxygen"><span class="header-section-number">3.1</span> Setting Up and Writing Documentation with Roxygen</h2>
-<p>To begin documenting your dataset, start by initializing Roxygen documentation. Open your R console within the project and run the following command:</p>
+<p>The dictionary describes the variables. This chapter turns it into help pages, completes the description of the package as a whole and generates the machine readable metadata that dataset search engines read.</p>
+<section id="write-the-help-pages" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="write-the-help-pages"><span class="header-section-number">3.1</span> Write the help pages</h2>
+<p>Every dataset in an R package has a help page. washr writes its source from the dictionary:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setup_roxygen</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>This will create the necessary documentation files in the <code>R/</code> folder of your project, setting up the foundation for detailed documentation.</p>
-<section id="writing-documentation" class="level3" data-number="3.1.1">
-<h3 data-number="3.1.1" class="anchored" data-anchor-id="writing-documentation"><span class="header-section-number">3.1.1</span> Writing Documentation</h3>
-<p>Once the documentation files are generated, navigate to the <code>R/</code> folder in your project. Each file in this folder, with a <code>.R</code> extension, represents a dataset or function. Open these files and provide a human-readable title and description using Roxygen comments (lines that start with <code>#'</code>). For instance, you could use the following format to document your dataset:</p>
-<pre><code>#' Title of Your Dataset
-#'
-#' A brief description of what the dataset contains and its purpose.
-#'
-#' @format A data frame with X rows and Y columns:
-#' \describe{
-#'   \item{column1}{Description of column1}
-#'   \item{column2}{Description of column2}
-#'   ...
-#' }
-#' @source Where the data comes from (if applicable)
-"dataset_name"</code></pre>
-<p>This method allows you to provide clear, concise details about each dataset, ensuring that users understand its structure and purpose.</p>
-</section>
-<section id="updating-your-github-repository" class="level3" data-number="3.1.2">
-<h3 data-number="3.1.2" class="anchored" data-anchor-id="updating-your-github-repository"><span class="header-section-number">3.1.2</span> Updating Your GitHub Repository</h3>
-<p>Once you’ve completed the documentation, it’s time to update your GitHub repository. In RStudio, go to the “Git” tab. Stage all the changed files by checking the boxes next to them, then click “Commit”. Write a meaningful commit message, such as “Add Roxygen documentation for dataset”, and click “Push” to update your repository with the latest changes.</p>
-</section>
-<section id="finalizing-and-installing-the-documentation" class="level3" data-number="3.1.3">
-<h3 data-number="3.1.3" class="anchored" data-anchor-id="finalizing-and-installing-the-documentation"><span class="header-section-number">3.1.3</span> Finalizing and Installing the Documentation</h3>
-<p>Now that your documentation is written, run the following commands in your R console:</p>
+<p>This creates one file per dataset under <code>R/</code>, with a title placeholder, a description placeholder and the variable table from the dictionary, written as roxygen comments (lines that start with <code>#'</code>).</p>
+<p>Open each file and replace the two placeholders. The title is a human readable name of the dataset, on one line. The description is a brief statement of what the dataset contains and what it is for. Then add a <code>@source</code> line above the quoted dataset name at the end of the file. It names who collected the data, a URL or a reference, and the date you accessed it. For a data package, the source is the most important field of the help page after the description.</p>
+<p>The lines from <code>@format</code> to the closing brace are generated from the dictionary. Do not edit them. When a description changes, change it in the dictionary and run <code>setup_roxygen()</code> again. It regenerates only the variable table and keeps the title, the description and the source you wrote.</p>
+<p>Then build the help pages, check the package and install it:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">document</span>()</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">check</span>()</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">document</span>()</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">check</span>()</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>These commands will generate the documentation from your Roxygen comments, check for any issues in the package, and install it locally. If you receive a warning about the license, don’t worry, as it will be addressed in the next section.</p>
+<p><code>devtools::document()</code> writes the help pages to <code>man/</code>. <code>devtools::check()</code> runs the same check as the workflow on GitHub. A warning about the license is expected at this point and goes away in the next section. <code>devtools::install()</code> installs the package on your computer, so that the README and the website can load the data.</p>
+<p>Commit and push.</p>
 </section>
-</section>
-<section id="updating-the-description-file" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="updating-the-description-file"><span class="header-section-number">3.2</span> Updating the DESCRIPTION File</h2>
-<p>To complete your package documentation, you’ll need to update the <code>DESCRIPTION</code> file with author information and other key details.</p>
-<section id="adding-yourself-as-an-author" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="adding-yourself-as-an-author"><span class="header-section-number">3.2.1</span> Adding Yourself as an Author</h3>
-<p>In your R console, add yourself as the author and maintainer by running:</p>
+<section id="complete-the-description-file" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="complete-the-description-file"><span class="header-section-number">3.2</span> Complete the DESCRIPTION file</h2>
+<p><code>DESCRIPTION</code> describes the package as a whole, with its title, what it contains, who made it and under which license. The citation files, the README, the website and the metadata all read from it, so a value that is wrong here is wrong everywhere. Fix it here and never in a generated file.</p>
+<section id="authors" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="authors"><span class="header-section-number">3.2.1</span> Authors</h3>
+<p>Add yourself as author and maintainer:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_author</span>(</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">given =</span> <span class="st">"Your First Name"</span>, </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">"Your Last Name"</span>, </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">role =</span> <span class="fu">c</span>(<span class="st">"aut"</span>, <span class="st">"cre"</span>), </span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">email =</span> <span class="st">"your.email@example.com"</span>,</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">comment =</span> <span class="fu">c</span>(<span class="at">ORCID =</span> <span class="st">"XXXX-XXXX-XXXX-XXXX"</span>)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_author</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">given =</span> <span class="st">"Your First Name"</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">"Your Last Name"</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">role =</span> <span class="fu">c</span>(<span class="st">"aut"</span>, <span class="st">"cre"</span>),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">email =</span> <span class="st">"your.email@example.com"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">comment =</span> <span class="fu">c</span>(<span class="at">ORCID =</span> <span class="st">"0000-0000-0000-0000"</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Here, <code>aut</code> indicates that you are an author, and <code>cre</code> designates you as the creator or maintainer of the package.</p>
+<p><code>aut</code> marks an author and <code>cre</code> the maintainer, the person who receives questions about the package. The ORCID iD reaches the citation files, the Zenodo record and the metadata, so give it when you have one.</p>
+<p>Add every other person who contributed with the same call, with <code>role = "aut"</code> for an author and <code>role = "ctb"</code> for a contributor. To collect the names, email addresses, roles and ORCID iDs, open an issue in the repository titled “Author information for DESCRIPTION” and ask everyone to add their line.</p>
 </section>
-<section id="documenting-other-contributors" class="level3" data-number="3.2.2">
-<h3 data-number="3.2.2" class="anchored" data-anchor-id="documenting-other-contributors"><span class="header-section-number">3.2.2</span> Documenting Other Contributors</h3>
-<p>To ensure proper credit is given, create a new issue in your GitHub repository titled “Author Information for DESCRIPTION File”. List all contributors, including their full name, email address, role (e.g., <code>aut</code> for authors or <code>ctb</code> for contributors), and ORCID (if applicable).</p>
-<p>For each additional contributor, run a similar command:</p>
+<section id="the-fields-washr-writes" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="the-fields-washr-writes"><span class="header-section-number">3.2.2</span> The fields washr writes</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_author</span>(<span class="at">given =</span> <span class="st">"Coauthor First Name"</span>, <span class="at">family =</span> <span class="st">"Coauthor Last Name"</span>, <span class="at">role =</span> <span class="st">"aut"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">update_description</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p>The call sets the fields the review standard expects and keeps every value that is already there. It writes the language, the date, the repository and bug report URLs, which it takes from the repository named in <code>DESCRIPTION</code>, and the CC BY 4.0 license when the package has none yet. It also writes a few <code>Config/washr/</code> fields, such as the funding sentence of the website and the analytics domain, with the openwashdata values for a package under openwashdata. The later steps read them from <code>DESCRIPTION</code>. The vignette section <a href="https://openwashdata.github.io/washr/articles/washr.html#publishing-outside-openwashdata">Publishing outside openwashdata</a> explains how another organisation sets its own values.</p>
+<p>Now open <code>DESCRIPTION</code> and write the title and the description. The title is one line in title case without a final period. The description is one paragraph that says what the data contains, where it comes from and when it was collected.</p>
 </section>
-<section id="updating-the-description-file-1" class="level3" data-number="3.2.3">
-<h3 data-number="3.2.3" class="anchored" data-anchor-id="updating-the-description-file-1"><span class="header-section-number">3.2.3</span> Updating the DESCRIPTION File</h3>
-<p>After adding all contributors, open the <code>DESCRIPTION</code> file in your project and ensure the title and description reflect the purpose of your package accurately. Then, in your R console, run:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">update_description</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>This will update fields such as version, authors, and dependencies. Review the <code>DESCRIPTION</code> file to make sure all information is accurate.</p>
-</section>
-<section id="documentation-check" class="level3" data-number="3.2.4">
-<h3 data-number="3.2.4" class="anchored" data-anchor-id="documentation-check"><span class="header-section-number">3.2.4</span> Documentation Check</h3>
-<p>To complete the process, run the following commands again:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">document</span>()</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">check</span>()</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-</section>
-<section id="fair-documentation" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="fair-documentation"><span class="header-section-number">3.3</span> FAIR Documentation</h2>
-<p>One function derives the machine readable metadata of your package from the files you have already written: <code>DESCRIPTION</code>, <code>data-raw/dictionary.csv</code>, <code>CITATION.cff</code> and the exports in <code>inst/extdata</code>. Nothing is edited by hand; when a value is wrong, change its source and run the function again.</p>
-<section id="keywords-and-coverage" class="level3" data-number="3.3.1">
-<h3 data-number="3.3.1" class="anchored" data-anchor-id="keywords-and-coverage"><span class="header-section-number">3.3.1</span> Keywords and coverage</h3>
-<p>Three facts have no other home, so they live in <code>DESCRIPTION</code>. Open the file and add three lines, with your own values:</p>
+<section id="keywords-coverage-and-source" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="keywords-coverage-and-source"><span class="header-section-number">3.2.3</span> Keywords, coverage and source</h3>
+<p>Three facts have no other home and go into <code>DESCRIPTION</code> by hand. Add three lines with your own values:</p>
 <pre><code>X-schema.org-keywords: sanitation, faecal sludge, Kampala
 X-schema.org-spatialCoverage: Kampala, Uganda
 X-schema.org-temporalCoverage: 2022-03-01/2022-09-30</code></pre>
-<p>The keywords are a comma separated list. The spatial coverage is a place name. The temporal coverage is the first and the last date of the data, separated by a slash.</p>
+<p>The keywords are a comma separated list. For an openwashdata package, start with <code>open data</code> and <code>washdata</code>, then add the topic and the country or region. The spatial coverage is a place name. The temporal coverage is the first and the last date of the data, separated by a slash.</p>
+<p>When the data comes from a published article, add its DOI as well:</p>
+<pre><code>X-schema.org-isBasedOn: https://doi.org/10.2166/wh.2026.173</code></pre>
+<p>The citation files then cite the article next to the data package, and the metadata records it as the source. Several DOIs are separated by commas.</p>
+<p>Run <code>devtools::document()</code>, <code>devtools::check()</code> and <code>devtools::install()</code> again, then commit and push.</p>
 </section>
-<section id="generating-the-metadata" class="level3" data-number="3.3.2">
-<h3 data-number="3.3.2" class="anchored" data-anchor-id="generating-the-metadata"><span class="header-section-number">3.3.2</span> Generating the metadata</h3>
-<p>In your R console run:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">update_metadata</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>The function writes a schema.org description of your dataset as JSON-LD into <code>pkgdown/templates/in-header.html</code>. The website build in the next chapter embeds it in the head of every page, where dataset search engines such as Google Dataset Search read it. The function ends with a list of the fields it could not fill and where to fill them.</p>
-<p>Run it again after every change to <code>DESCRIPTION</code>, the dictionary or the exports, and once more after the DOI exists (see <a href="creating_doi.html" class="quarto-xref"><span>Chapter 5</span></a>). A second run with nothing changed writes nothing.</p>
 </section>
-<section id="final-documentation-check" class="level3" data-number="3.3.3">
-<h3 data-number="3.3.3" class="anchored" data-anchor-id="final-documentation-check"><span class="header-section-number">3.3.3</span> Final Documentation Check</h3>
-<p>To complete the process, run the following commands again:</p>
+<section id="generate-the-metadata" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="generate-the-metadata"><span class="header-section-number">3.3</span> Generate the metadata</h2>
+<p>One function derives the machine readable metadata of your package from the files you have already written, which are <code>DESCRIPTION</code>, the dictionary, the citation file and the exports in <code>inst/extdata/</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">document</span>()</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">check</span>()</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">update_metadata</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>These steps will ensure your package is fully documented, checked for errors, and ready for use.</p>
+<p>It writes a schema.org description of the dataset as JSON-LD into <code>pkgdown/templates/in-header.html</code>. The website build in the next chapter embeds it in the head of every page, where dataset search engines such as Google Dataset Search read it. The function ends with the fields it could not fill and where to fill them. Before the release, the DOI is the one field that stays blank.</p>
+<p>Nothing in this file is edited by hand. When a value is wrong, change its source and run the function again. Run it again after every change to <code>DESCRIPTION</code>, the dictionary or the exports, and once more after the DOI exists (<a href="creating_doi.html" class="quarto-xref"><span>Chapter 5</span></a>). A second run with nothing changed writes nothing.</p>
+<p>Commit and push.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -462,7 +400,7 @@ X-schema.org-temporalCoverage: 2022-03-01/2022-09-30</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/global-health-engineering\.github\.io\/ghedatapublishing\/");
+        var filterRegex = new RegExp("https:\/\/openwashdata\.github\.io\/fair-publishing\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -791,13 +729,13 @@ X-schema.org-temporalCoverage: 2022-03-01/2022-09-30</code></pre>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./data_preparation.html" class="pagination-link" aria-label="Preparing your dataset">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preparing your dataset</span></span>
+      <a href="./data_preparation.html" class="pagination-link" aria-label="Preparing the data">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preparing the data</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./data_publication.html" class="pagination-link" aria-label="Publishing Your Dataset">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Publishing Your Dataset</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./data_publication.html" class="pagination-link" aria-label="Publishing the data">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Publishing the data</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -805,11 +743,11 @@ X-schema.org-temporalCoverage: 2022-03-01/2022-09-30</code></pre>
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Data Publishing with <code>washr</code> was written by the <a href="https://openwashdata.org/about#team"> Open Science Team </a> at <a href="https://ghe.ethz.ch/"> GHE </a></p>
+<p>FAIR Data Publishing is maintained by the <a href="https://openwashdata.org/about#team">openwashdata team</a> at <a href="https://ghe.ethz.ch/">Global Health Engineering</a>, ETH Zurich</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Global-Health-Engineering/ghedatapublishing/edit/main/data_documentation.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Global-Health-Engineering/ghedatapublishing/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openwashdata/fair-publishing/edit/main/data_documentation.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openwashdata/fair-publishing/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
 </div>

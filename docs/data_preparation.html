@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; Preparing your dataset – Data Publishing with `washr`</title>
+<title>2&nbsp; Preparing the data – FAIR Data Publishing</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -124,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data_preparation.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preparing your dataset</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data_preparation.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preparing the data</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -139,10 +139,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Data Publishing with <code>washr</code></a> 
+      <a href="./">FAIR Data Publishing</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/Global-Health-Engineering/ghedatapublishing" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <a href="./Data-Publishing-with-`washr`.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="https://github.com/openwashdata/fair-publishing" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./fair-data-publishing.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -179,31 +179,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./creating_repo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Creating a repository</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Creating the package and its repository</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data_preparation.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preparing your dataset</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preparing the data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data_documentation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Documenting Your Dataset</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Documenting the data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data_publication.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Publishing Your Dataset</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Publishing the data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./creating_doi.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Creating a DOI and connecting it to GitHub</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Creating a release and a DOI</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -222,22 +222,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#clean-and-process-your-raw-data" id="toc-clean-and-process-your-raw-data" class="nav-link active" data-scroll-target="#clean-and-process-your-raw-data"><span class="header-section-number">2.1</span> Clean and Process Your Raw Data</a></li>
-  <li><a href="#creating-a-data-dictionary" id="toc-creating-a-data-dictionary" class="nav-link" data-scroll-target="#creating-a-data-dictionary"><span class="header-section-number">2.2</span> Creating a Data Dictionary</a>
-  <ul class="collapse">
-  <li><a href="#set-up-the-dictionary-template" id="toc-set-up-the-dictionary-template" class="nav-link" data-scroll-target="#set-up-the-dictionary-template"><span class="header-section-number">2.2.1</span> Set Up the Dictionary Template</a></li>
-  <li><a href="#fill-in-the-data-dictionary" id="toc-fill-in-the-data-dictionary" class="nav-link" data-scroll-target="#fill-in-the-data-dictionary"><span class="header-section-number">2.2.2</span> Fill in the Data Dictionary</a></li>
-  <li><a href="#update-github-with-your-data-dictionary" id="toc-update-github-with-your-data-dictionary" class="nav-link" data-scroll-target="#update-github-with-your-data-dictionary"><span class="header-section-number">2.2.3</span> Update GitHub with Your Data Dictionary</a></li>
-  </ul></li>
+  <li><a href="#bring-in-the-raw-data" id="toc-bring-in-the-raw-data" class="nav-link active" data-scroll-target="#bring-in-the-raw-data"><span class="header-section-number">2.1</span> Bring in the raw data</a></li>
+  <li><a href="#clean-and-process-the-raw-data" id="toc-clean-and-process-the-raw-data" class="nav-link" data-scroll-target="#clean-and-process-the-raw-data"><span class="header-section-number">2.2</span> Clean and process the raw data</a></li>
+  <li><a href="#write-the-data-dictionary" id="toc-write-the-data-dictionary" class="nav-link" data-scroll-target="#write-the-data-dictionary"><span class="header-section-number">2.3</span> Write the data dictionary</a></li>
+  <li><a href="#when-the-data-changes-later" id="toc-when-the-data-changes-later" class="nav-link" data-scroll-target="#when-the-data-changes-later"><span class="header-section-number">2.4</span> When the data changes later</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Global-Health-Engineering/ghedatapublishing/edit/main/data_preparation.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Global-Health-Engineering/ghedatapublishing/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/openwashdata/fair-publishing/edit/main/data_preparation.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openwashdata/fair-publishing/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-datapreparation" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preparing your dataset</span></span></h1>
+<h1 class="title"><span id="sec-datapreparation" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preparing the data</span></span></h1>
 </div>
 
 
@@ -254,49 +251,78 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Everything starts with a dataset that you want to publish. You might even have several datasets, some stored locally on your computer, others on an external hard drive or in the cloud.</p>
+<p>Everything starts with a dataset that you want to publish. You might have several files, some on your computer, others on an external drive or in the cloud. This chapter brings them into the package, cleans them into one or more tidy datasets and describes every variable in a data dictionary.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/datapreparation.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="border: 1px solid black;"></p>
 </figure>
 </div>
-<p>Before the data, add the check that every push to GitHub will run. Open your R console within your project and execute:</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Check for personal data first
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Once data is in a public repository, deleting it later does not undo the exposure, because copies and caches remain, and the git history keeps every version of a file. Before the first commit that contains data, look at every column and a sample of the values in every file. Does a row name or locate a person? Names, phone numbers, email addresses, ID numbers, household coordinates and data at the household or person level all count. The pkgreview <a href="https://github.com/openwashdata/pkgreview/blob/main/docs/guidebook.md">contributor guidebook</a> describes the check in full. If you find any of this, remove or aggregate it before you continue, or ask the openwashdata team for help.</p>
+</div>
+</div>
+<section id="bring-in-the-raw-data" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="bring-in-the-raw-data"><span class="header-section-number">2.1</span> Bring in the raw data</h2>
+<p>In the R console, from the package project, run:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(washr)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setup_ci</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setup_rawdata</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>This writes a GitHub Actions workflow that runs <code>R CMD check</code> on every push and pull request, on macOS, Windows and Linux. The openwashdata review standard requires it, and your package now meets that part of the standard from its first commit.</p>
-<p>As a first step for the data, you need to create a data directory where all datasets are stored in one place. In your R console, execute:</p>
+<p>This creates the folder <code>data-raw/</code> and a processing script, <code>data-raw/data_processing.R</code>, with the steps the script should follow. Copy or move your raw files into <code>data-raw/</code>. The raw files are kept exactly as you received them and are never edited by hand. Every change happens in the script, so anyone can trace the published data back to the source.</p>
+<p>Commit the raw files and push.</p>
+</section>
+<section id="clean-and-process-the-raw-data" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="clean-and-process-the-raw-data"><span class="header-section-number">2.2</span> Clean and process the raw data</h2>
+<p>Open <code>data-raw/data_processing.R</code>. The script reads the raw files, cleans them into one or more tidy data frames and saves each one in two forms. <code>usethis::use_data()</code> writes an <code>.rda</code> file into <code>data/</code>, which is what the package loads. <code>readr::write_csv()</code> and <code>openxlsx::write.xlsx()</code> write a CSV and an XLSX file into <code>inst/extdata/</code>, which is what the website and the download table of the README link to. The template already holds the reading, saving and export blocks for one data frame named after the package. Add your cleaning steps in between, and keep that name for your main dataset or change it in all three export calls.</p>
+<p>A package can hold more than one dataset. In that case, repeat the saving and export block for each data frame, so that each one lands in <code>data/</code> and in <code>inst/extdata/</code>.</p>
+<p>When the script is finished, run it from top to bottom with “Source” in the editor. Check the results in <code>data/</code> and <code>inst/extdata/</code>, then commit the script and the generated files and push.</p>
+</section>
+<section id="write-the-data-dictionary" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="write-the-data-dictionary"><span class="header-section-number">2.3</span> Write the data dictionary</h2>
+<p>The dictionary is the one place where variables are described. The help pages and the metadata are generated from it. Run:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setup_rawdata</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setup_dictionary</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>This command will create a new directory called <code>data-raw</code> in your project folder where you will store all your raw datasets. Copy or move all your files into the newly created <code>data-raw</code> directory.</p>
-<p>Next, you’ll want to have this directory under version control so that you can track your changes.</p>
-<p>In RStudio, locate the “Git” tab in the top-right panel. As a good practice, begin by clicking “Pull” to ensure you have the latest changes. In the Git tab, you will see a list of changed files—tick the checkboxes next to all the files you’ve added or modified. Next, click the “Commit” button. A new window will appear where you can enter a descriptive commit message, explaining what changes you’ve made (for example, “Add raw data files to data-raw directory”). Finally, click the “Push” button to upload your changes to GitHub.</p>
-<section id="clean-and-process-your-raw-data" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="clean-and-process-your-raw-data"><span class="header-section-number">2.1</span> Clean and Process Your Raw Data</h2>
-<p>Open the file <code>data-raw/data_processing.R</code> in your RStudio editor, which contains some pre-populated code. You’ll need to modify this script to fit your specific data cleaning needs. Add your own R code to clean and process your raw data files, ensuring that the script reads the files from the data-raw directory and outputs a tidy, well-organized version of the data.</p>
-<p>After you’ve finished editing data_processing.R, run the entire script to execute your data cleaning process. You can do this by clicking “Source” at the top of the editor window, or by selecting all the code and clicking “Run.” This will process your raw data and produce a tidy version of the dataset, ready for analysis.</p>
-<p>Return to the “Git” tab in RStudio, where you should see your modified data_processing.R file, along with any new output files that may have been generated. Commit these changes by entering a meaningful commit message, such as “Clean and process raw data.” Once you’ve committed the changes, push them to GitHub to ensure your updates are saved and accessible.</p>
+<p>This reads every dataset in <code>data/</code> and writes <code>data-raw/dictionary.csv</code> with one row per variable. The columns are the folder, the file the variable belongs to, the variable name, its type and an empty description.</p>
+<p>Open the file in RStudio or in a spreadsheet program and write a description for every variable. The description is the most important text of the whole package. A reader who has never seen your project should understand what a variable means from the description alone.</p>
+<ul>
+<li>Write one sentence in plain language.</li>
+<li>Say what was measured or recorded.</li>
+<li>Give the unit when there is one.</li>
+<li>Name the possible values when there are few.</li>
+</ul>
+<p>Two descriptions that work:</p>
+<ul>
+<li>“Distance in meters from the household to the nearest water point.”</li>
+<li>“Whether the water point was working on the day of the visit (yes or no).”</li>
+</ul>
+<p>Two that do not, because they repeat the variable name or stay vague:</p>
+<ul>
+<li>“The distance variable.”</li>
+<li>“Status.”</li>
+</ul>
+<p>Leave no description empty. Keep the five columns washr wrote, in their order, and do not edit the type column, which washr fills from the data. If you edit the file in Excel, save it in the “CSV UTF-8” format, because the plain CSV format of Excel on Windows is not UTF-8.</p>
+<p>Commit the dictionary and push.</p>
 </section>
-<section id="creating-a-data-dictionary" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="creating-a-data-dictionary"><span class="header-section-number">2.2</span> Creating a Data Dictionary</h2>
-<section id="set-up-the-dictionary-template" class="level3" data-number="2.2.1">
-<h3 data-number="2.2.1" class="anchored" data-anchor-id="set-up-the-dictionary-template"><span class="header-section-number">2.2.1</span> Set Up the Dictionary Template</h3>
-<p>In your R console, execute the command <code>setup_dictionary()</code>. This will create a new file called dictionary.csv in your data-raw directory.</p>
-</section>
-<section id="fill-in-the-data-dictionary" class="level3" data-number="2.2.2">
-<h3 data-number="2.2.2" class="anchored" data-anchor-id="fill-in-the-data-dictionary"><span class="header-section-number">2.2.2</span> Fill in the Data Dictionary</h3>
-<p>Next, open <code>data-raw/dictionary.csv</code> in a spreadsheet program like Excel or in RStudio’s data viewer. You will see columns corresponding to each dataset and variable in your tidy data. Focus on the “description” column: for each row representing a variable, provide a clear and concise description of what that variable represents. Include relevant information such as units of measurement, possible values, or any other pertinent details. Once you’ve completed this, save your changes to <code>dictionary.csv</code>.</p>
-</section>
-<section id="update-github-with-your-data-dictionary" class="level3" data-number="2.2.3">
-<h3 data-number="2.2.3" class="anchored" data-anchor-id="update-github-with-your-data-dictionary"><span class="header-section-number">2.2.3</span> Update GitHub with Your Data Dictionary</h3>
-<p>Return to the “Git” tab in RStudio, where you should see the modified <code>dictionary.csv</code> file. Commit these changes with a message like “Add data dictionary,” and then push your changes to GitHub.</p>
-<p>Finally, review your GitHub repository online to ensure that all your changes have been uploaded correctly. You should now have a <code>data-raw</code> directory containing your original data files, a <code>data_processing.R</code> script in which you clean your data, and a <code>dictionary.csv</code> file describing your tidy dataset.</p>
-<p>Congratulations! You’ve successfully prepared your dataset and created a data dictionary, all while maintaining version control with Git and GitHub.</p>
+<section id="when-the-data-changes-later" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="when-the-data-changes-later"><span class="header-section-number">2.4</span> When the data changes later</h2>
+<p>When the processing script changes and a variable is added, removed or changes its type, run:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">update_dictionary</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>It adds a row for each new variable, removes the row of a variable that no longer exists, refreshes the types and keeps every description you wrote. Running <code>setup_dictionary()</code> again would stop, because the dictionary exists. After an update, run <code>setup_roxygen()</code> from the next chapter again, so that the help pages follow.</p>
+<p>Your repository now holds the raw files, the processing script, the tidy datasets with their exports, and the dictionary, all under version control.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -373,7 +399,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/global-health-engineering\.github\.io\/ghedatapublishing\/");
+        var filterRegex = new RegExp("https:\/\/openwashdata\.github\.io\/fair-publishing\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -702,13 +728,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./creating_repo.html" class="pagination-link" aria-label="Creating a repository">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Creating a repository</span></span>
+      <a href="./creating_repo.html" class="pagination-link" aria-label="Creating the package and its repository">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Creating the package and its repository</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./data_documentation.html" class="pagination-link" aria-label="Documenting Your Dataset">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Documenting Your Dataset</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./data_documentation.html" class="pagination-link" aria-label="Documenting the data">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Documenting the data</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -716,11 +742,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Data Publishing with <code>washr</code> was written by the <a href="https://openwashdata.org/about#team"> Open Science Team </a> at <a href="https://ghe.ethz.ch/"> GHE </a></p>
+<p>FAIR Data Publishing is maintained by the <a href="https://openwashdata.org/about#team">openwashdata team</a> at <a href="https://ghe.ethz.ch/">Global Health Engineering</a>, ETH Zurich</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Global-Health-Engineering/ghedatapublishing/edit/main/data_preparation.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Global-Health-Engineering/ghedatapublishing/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openwashdata/fair-publishing/edit/main/data_preparation.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openwashdata/fair-publishing/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
 </div>
