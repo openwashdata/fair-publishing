@@ -1,21 +1,37 @@
 # Troubleshooting {#sec-troubleshooting}
 
-Although we try to make this guide as detailed as possible, unfortunately we cannot account for all eventualities. That's why we've compiled a list of common issues (and solutions) here.
+This guide cannot cover every situation. The problems below have come up more than once, with what fixed them. If you run into one that is missing, please open an issue in the [source repository](https://github.com/openwashdata/fair-publishing/issues).
 
-## Git fails when pushing commit to github
+## Start with the readiness report
 
-If you want to push large files (e.g. raw datasets) to GitHub, Git may fail. A simple workaround is to increase the buffer size. You can do this with the following line in the terminal. Note that you need to be in the working directory of your project.
+`check_publication_readiness()` reads the package and names, for every item that fails, the step that closes it. Run it first whenever a later step stops with a message about a missing file.
+
+## setup_dictionary() stops because the dictionary exists
+
+Run `update_dictionary()` instead. It brings the dictionary in line with the data and keeps every description you wrote (@sec-datapreparation).
+
+## setup_website() stops because README.md is missing
+
+The website is built from the README. Run `setup_readme()` and `devtools::build_readme()` first (@sec-datapublication).
+
+## pkgdown reports "URLs not ok"
+
+The address of the site is missing from `DESCRIPTION`. Add it with `desc::desc_add_urls()` and the value of the `url` line of `_pkgdown.yml`, then build again (@sec-datapublication).
+
+## Git fails when pushing large files
+
+When you push large files such as raw datasets, Git may fail. Raise the buffer size with the following line in the Terminal, from the folder of your project:
 
 ```
 git config http.postBuffer 524288000
 ```
 
-## R CMD CHECK
+## R CMD check
 
-During the publication process, you might encounter several common issues when running R CMD CHECK. Here's how to address them:
+A few messages from `devtools::check()` come up again and again.
 
-If you receive a "unable to verify current time" error, this typically relates to your system's time synchronization. You can find a detailed solution in the [Stack Overflow discussion](https://stackoverflow.com/a/63837547/6816220) addressing this specific issue.
+"unable to verify current time" relates to the time synchronisation of your computer. This [Stack Overflow answer](https://stackoverflow.com/a/63837547/6816220) has the fix.
 
-Another common issue is the "Non-standard files/directories found at top level" warning. This occurs when your package contains files that R doesn't expect in the root directory. While this warning doesn't prevent your package from working, you can resolve it by following the guidance provided in this [Stack Overflow thread](https://stackoverflow.com/questions/48955103/non-standard-file-directory-found-at-top-level-readme-rmd-persists-even-after).
+"Non-standard files/directories found at top level" means that the package root holds files R does not expect there. The fix is to list them in `.Rbuildignore`, as this [Stack Overflow thread](https://stackoverflow.com/questions/48955103/non-standard-file-directory-found-at-top-level-readme-rmd-persists-even-after) explains. The washr functions add their own files to `.Rbuildignore`, so this message points at a file you added.
 
-Remember to verify all URLs and steps before beginning the process, as platforms occasionally update their interfaces and requirements. If you encounter any issues not covered in this manual, consult the respective platform's documentation or reach out to their support teams. By following these steps carefully, your data package is properly documented, citeable, and accessible to the research community.
+Platforms change their interfaces from time to time, so a button or a menu named in this guide may have moved. The documentation of the platform is the place to look then.

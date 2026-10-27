@@ -1,48 +1,76 @@
-# Creating a repository {#sec-repository}
+# Creating the package and its repository {#sec-repository}
+
+Everything you publish lives in one R package, and the package lives in one Git repository on GitHub. This chapter creates both and connects them. You need R, RStudio, Git and a GitHub account, and you need to be a member of the GitHub organisation you publish under.
 
 ::: {.callout-note}
-The following steps assume that you are a member of GHE on GitHub. If you are not, reach out [here](https://github.com/Global-Health-Engineering) so we can create a repository for you.
+openwashdata packages live in the [openwashdata](https://github.com/openwashdata) organisation, and Global Health Engineering packages in [Global-Health-Engineering](https://github.com/Global-Health-Engineering). If you are not a member yet, write to the team of the organisation and ask for an invitation.
 :::
 
-As your very first step, you have to create a new repository within the Global Health Engineering (hereafter referred to as GHE) organization on GitHub. You can do this [here](https://github.com/Global-Health-Engineering).
+Before you start, check that the [usethis](https://usethis.r-lib.org/), [devtools](https://devtools.r-lib.org/) and [washr](https://openwashdata.github.io/washr/) packages are installed. All three are on CRAN:
 
-Choose a name for your repository, make it public if your data is not confidential/sensitive and click on "Create repository". For now, you don't need a README, .gitignore file or a license. You'll add these at a later stage.
+```{r}
+install.packages(c("usethis", "devtools", "washr"))
+```
 
-Once the repository is initialized, go back to RStudio and check if the [`devtools`](https://devtools.r-lib.org/) and [`usethis`](https://usethis.r-lib.org/) packages are installed. If not, please install/update them now as some of their functions are needed in the next steps.
+Git needs your name and email, and usethis needs to know your GitHub account. `usethis::git_sitrep()` reports what is set and what is missing, and the usethis article [Managing Git(Hub) credentials](https://usethis.r-lib.org/articles/git-credentials.html) explains the setup.
 
-Next, you have to create an [R Project](https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects). Go to *File \> New Project \> New Directory \> R Package using devtools*.
+## Create the package
+
+The package name is the name of the dataset, in lower case, with no dots or underscores. Choose it with care, because it becomes the repository name, the name people install and the name in every citation. In the R console, create the package and open it as a project:
+
+```{r}
+usethis::create_package("~/path/to/yourpackagename")
+```
+
+RStudio opens the new project. The folder holds a `DESCRIPTION` file, an empty `R/` folder and a `NAMESPACE` file. Everything else is added in the next chapters. The RStudio menu *File > New Project > New Directory > R Package using devtools* does the same.
 
 ![](images/create_pkg_with_devtools.png){fig-align="center" style="border: 1px solid black;"}
 
-Copy and paste the name you chose for your GitHub repository as the directory name and select a location on your computer for your new project.
+## Put it under version control
 
-::: callout-note
-For the next steps, we assume that you've already configured Git on your computer. If not, please make sure to do that before proceeding.
-:::
-
-Before you can connect your project to GitHub, your project needs to be a Git repository with at least one commit. Run the following command in the Console:
+The project needs to be a Git repository with at least one commit before it can go to GitHub. Run:
 
 ```{r}
 usethis::use_git()
 ```
 
-When asked whether it is ok to commit the files, accept the initial commit. Afterwards, `usethis` asks to restart RStudio so that the Git tab appears. Accept this as well and wait for RStudio to restart.
+usethis asks whether it may commit the files. Accept. It then asks to restart RStudio so that the Git tab appears. Accept this as well and wait for the restart.
 
-With your project set up locally and a new repository online, it's time to connect the two. To do this, switch to the Terminal (the tab next to Console in RStudio) and run the following commands one after the other.
+## Create the repository on GitHub
 
-::: callout-warning
-Replace `REPO` with the name of your newly created repository.
-:::
+With the project under version control, one call creates the repository in your organisation, connects it to your project and pushes the first commit:
 
-```      
-git remote add origin "https://github.com/Global-Health-Engineering/REPO.git" 
+```{r}
+usethis::use_github(organisation = "openwashdata")
+```
 
+Replace the organisation with the one you publish under. The repository is public, which is right for data that holds nothing confidential or personal. @sec-datapreparation covers that check before any data is pushed. The call needs a GitHub token with permission to create repositories in the organisation. `usethis::gh_token_help()` explains how to get one.
+
+If the call fails, create the repository by hand. Go to the organisation page on GitHub, click "New repository", give it the package name, keep it empty (no README, no .gitignore file, no license, they are added later) and create it. Then switch to the Terminal tab in RStudio, next to the Console, and connect the two, with `ORGANISATION` and `REPO` replaced:
+
+```
+git remote add origin "https://github.com/ORGANISATION/REPO.git"
 git branch -M main
-
 git push -u origin main
 ```
 
-If everything went well, your local repository (on your computer) should now be connected to the remote repository (on GitHub) which allows you to push and pull changes and to invite collaborators.
+Afterwards, run `usethis::use_github_links()` once, so that `DESCRIPTION` names the repository. `use_github()` does this on its own.
+
+Either way, your local repository on your computer is now connected to the remote repository on GitHub, so you can push and pull changes and invite collaborators.
 
 ![](images/repos.png){fig-align="center" width=40% height=40% style="border: 1px solid black;"}
 
+## Add the check that runs on every push
+
+washr writes a GitHub Actions workflow that runs `R CMD check` on every push and pull request, on macOS, Windows and three versions of R on Linux. The openwashdata review standard requires it, so add it now and the package meets that part of the standard from its first commit:
+
+```{r}
+library(washr)
+setup_ci()
+```
+
+The workflow lands in `.github/workflows/R-CMD-check.yaml`. Commit it and push.
+
+## Committing and pushing from RStudio
+
+The chapters that follow end each step with a commit and a push. In RStudio, open the Git tab in the top right panel. Click "Pull" first, so that you have the latest changes. Tick the boxes next to the files you added or changed and click "Commit". A window opens. Write a short message that says what changed, for example "Add raw data files", and click "Commit". Then click "Push" to upload the commit to GitHub.

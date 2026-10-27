@@ -4,10 +4,22 @@ engine: knitr
 
 # Welcome {.unnumbered}
 
-Publishing data can be challenging, especially when adhering to standards of reproducibility. Although technically available, an Excel workbook with multiple tabs, tucked away in an online archive, is far from practical. In other words, it lacks the key principles of being findable, accessible, interoperable, and reproducible — commonly known as FAIR.
+A dataset that sits as a spreadsheet in an online archive is available in principle, but hard to find, hard to understand and hard to cite. The FAIR principles ask for more. Data should be findable, accessible, interoperable and reusable. This guide walks through one way to get there. You turn a cleaned dataset into an R data package with a data dictionary, help pages, a README, a website, citation files and machine readable metadata, and you publish it with a DOI.
 
-This guide aims to provide a detailed walkthrough of how data can be published according to the FAIR principles. It builds on [`washr`](https://github.com/openwashdata/washr), an R package developed for swift data publication. The package emerged from the need to streamline certain steps when publishing the datasets collected during [GHE's openwashdata academy](https://openwashdata.org/pages/academy/). The code in this guide was last checked against washr version `r readLines("WASHR_VERSION", warn = FALSE)[1]`, the version recorded in the `WASHR_VERSION` file of the [source repository](https://github.com/Global-Health-Engineering/ghedatapublishing).
+The guide is written for researchers at [Global Health Engineering](https://ghe.ethz.ch/) at ETH Zurich and for the [openwashdata](https://openwashdata.org/) community, and it works for anyone who publishes a dataset under their own GitHub organisation. It builds on [washr](https://openwashdata.github.io/washr/), the R package that writes each file of the package from what you have already written. The code in this guide was last checked against washr version `r readLines("WASHR_VERSION", warn = FALSE)[1]`, the version recorded in the `WASHR_VERSION` file of the [source repository](https://github.com/openwashdata/fair-publishing).
 
-The guide follows a chronological structure, starting from an empty repository and resulting in the publication of data as a website. @sec-repository introduces version control, guiding readers through setting up both local and remote repositories to track all development steps. @sec-datapreparation focuses on transforming the dataset into a tidy format. @sec-datadocumentation covers the documentation of the tidy dataset. @sec-datapublication explains how users can create a website to showcase their dataset. Finally, @sec-doi helps you create a Digital Object Identifier (DOI) for your published data. 
+## Three ways to follow the workflow {.unnumbered}
 
-This book is a work in progress. As we publish more data, we learn more and these insights flow back into this book. If something is unclear or incomplete, please open an issue [here](https://github.com/Global-Health-Engineering/ghedatapublishing/issues) and we'll try to address it.
+The same steps exist in three forms, and each form has one job.
+
+- This guide is the narrative. It explains why each step exists and covers the parts that happen outside R, such as creating the GitHub repository and the Zenodo release. It needs no AI tools.
+- The washr vignette [Get started with washr](https://openwashdata.github.io/washr/articles/washr.html) is the condensed reference, with one section per function in the same order as the chapters here.
+- The washr skill in the [openwashdata plugin for Claude Code](https://github.com/openwashdata/pkgreview) is the AI assisted path. It runs the same functions and drafts the descriptions, titles and README text for you to confirm.
+
+## What the chapters cover {.unnumbered}
+
+@sec-repository creates the package and connects it to GitHub. @sec-datapreparation brings in the raw data, cleans it into a tidy dataset and writes the data dictionary. @sec-datadocumentation writes the help pages, completes the package metadata and generates the machine readable description. @sec-datapublication writes the README and builds the website. @sec-doi creates the release and the DOI. @sec-troubleshooting collects the problems we have seen and what fixed them.
+
+Every washr function reads what is there, merges its changes and writes only what changed, so you can run a step again after you have edited the files it wrote.
+
+This guide is a work in progress. As more data is published, we learn more, and these insights flow back into the guide. If something is unclear or incomplete, please open an issue in the [source repository](https://github.com/openwashdata/fair-publishing/issues).

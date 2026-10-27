@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>1&nbsp; Creating a repository – Data Publishing with `washr`</title>
+<title>1&nbsp; Creating the package and its repository – FAIR Data Publishing</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -124,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./creating_repo.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Creating a repository</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./creating_repo.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Creating the package and its repository</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -139,10 +139,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Data Publishing with <code>washr</code></a> 
+      <a href="./">FAIR Data Publishing</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/Global-Health-Engineering/ghedatapublishing" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <a href="./Data-Publishing-with-`washr`.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="https://github.com/openwashdata/fair-publishing" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./fair-data-publishing.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -179,31 +179,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./creating_repo.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Creating a repository</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Creating the package and its repository</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data_preparation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preparing your dataset</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preparing the data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data_documentation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Documenting Your Dataset</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Documenting the data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data_publication.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Publishing Your Dataset</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Publishing the data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./creating_doi.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Creating a DOI and connecting it to GitHub</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Creating a release and a DOI</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -217,15 +217,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#create-the-package" id="toc-create-the-package" class="nav-link active" data-scroll-target="#create-the-package"><span class="header-section-number">1.1</span> Create the package</a></li>
+  <li><a href="#put-it-under-version-control" id="toc-put-it-under-version-control" class="nav-link" data-scroll-target="#put-it-under-version-control"><span class="header-section-number">1.2</span> Put it under version control</a></li>
+  <li><a href="#create-the-repository-on-github" id="toc-create-the-repository-on-github" class="nav-link" data-scroll-target="#create-the-repository-on-github"><span class="header-section-number">1.3</span> Create the repository on GitHub</a></li>
+  <li><a href="#add-the-check-that-runs-on-every-push" id="toc-add-the-check-that-runs-on-every-push" class="nav-link" data-scroll-target="#add-the-check-that-runs-on-every-push"><span class="header-section-number">1.4</span> Add the check that runs on every push</a></li>
+  <li><a href="#committing-and-pushing-from-rstudio" id="toc-committing-and-pushing-from-rstudio" class="nav-link" data-scroll-target="#committing-and-pushing-from-rstudio"><span class="header-section-number">1.5</span> Committing and pushing from RStudio</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/openwashdata/fair-publishing/edit/main/creating_repo.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openwashdata/fair-publishing/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-repository" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Creating a repository</span></span></h1>
+<h1 class="title"><span id="sec-repository" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Creating the package and its repository</span></span></h1>
 </div>
 
 
@@ -242,6 +252,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p>Everything you publish lives in one R package, and the package lives in one Git repository on GitHub. This chapter creates both and connects them. You need R, RStudio, Git and a GitHub account, and you need to be a member of the GitHub organisation you publish under.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -252,64 +263,69 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The following steps assume that you are a member of GHE on GitHub. If you are not, reach out <a href="https://github.com/Global-Health-Engineering">here</a> so we can create a repository for you.</p>
+<p>openwashdata packages live in the <a href="https://github.com/openwashdata">openwashdata</a> organisation, and Global Health Engineering packages in <a href="https://github.com/Global-Health-Engineering">Global-Health-Engineering</a>. If you are not a member yet, write to the team of the organisation and ask for an invitation.</p>
 </div>
 </div>
-<p>As your very first step, you have to create a new repository within the Global Health Engineering (hereafter referred to as GHE) organization on GitHub. You can do this <a href="https://github.com/Global-Health-Engineering">here</a>.</p>
-<p>Choose a name for your repository, make it public if your data is not confidential/sensitive and click on “Create repository”. For now, you don’t need a README, .gitignore file or a license. You’ll add these at a later stage.</p>
-<p>Once the repository is initialized, go back to RStudio and check if the <a href="https://devtools.r-lib.org/"><code>devtools</code></a> and <a href="https://usethis.r-lib.org/"><code>usethis</code></a> packages are installed. If not, please install/update them now as some of their functions are needed in the next steps.</p>
-<p>Next, you have to create an <a href="https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects">R Project</a>. Go to <em>File &gt; New Project &gt; New Directory &gt; R Package using devtools</em>.</p>
+<p>Before you start, check that the <a href="https://usethis.r-lib.org/">usethis</a>, <a href="https://devtools.r-lib.org/">devtools</a> and <a href="https://openwashdata.github.io/washr/">washr</a> packages are installed. All three are on CRAN:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"usethis"</span>, <span class="st">"devtools"</span>, <span class="st">"washr"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Git needs your name and email, and usethis needs to know your GitHub account. <code>usethis::git_sitrep()</code> reports what is set and what is missing, and the usethis article <a href="https://usethis.r-lib.org/articles/git-credentials.html">Managing Git(Hub) credentials</a> explains the setup.</p>
+<section id="create-the-package" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="create-the-package"><span class="header-section-number">1.1</span> Create the package</h2>
+<p>The package name is the name of the dataset, in lower case, with no dots or underscores. Choose it with care, because it becomes the repository name, the name people install and the name in every citation. In the R console, create the package and open it as a project:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">create_package</span>(<span class="st">"~/path/to/yourpackagename"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>RStudio opens the new project. The folder holds a <code>DESCRIPTION</code> file, an empty <code>R/</code> folder and a <code>NAMESPACE</code> file. Everything else is added in the next chapters. The RStudio menu <em>File &gt; New Project &gt; New Directory &gt; R Package using devtools</em> does the same.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/create_pkg_with_devtools.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="border: 1px solid black;"></p>
 </figure>
 </div>
-<p>Copy and paste the name you chose for your GitHub repository as the directory name and select a location on your computer for your new project.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>For the next steps, we assume that you’ve already configured Git on your computer. If not, please make sure to do that before proceeding.</p>
-</div>
-</div>
-<p>Before you can connect your project to GitHub, your project needs to be a Git repository with at least one commit. Run the following command in the Console:</p>
+</section>
+<section id="put-it-under-version-control" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="put-it-under-version-control"><span class="header-section-number">1.2</span> Put it under version control</h2>
+<p>The project needs to be a Git repository with at least one commit before it can go to GitHub. Run:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_git</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_git</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>When asked whether it is ok to commit the files, accept the initial commit. Afterwards, <code>usethis</code> asks to restart RStudio so that the Git tab appears. Accept this as well and wait for RStudio to restart.</p>
-<p>With your project set up locally and a new repository online, it’s time to connect the two. To do this, switch to the Terminal (the tab next to Console in RStudio) and run the following commands one after the other.</p>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<p>usethis asks whether it may commit the files. Accept. It then asks to restart RStudio so that the Git tab appears. Accept this as well and wait for the restart.</p>
+</section>
+<section id="create-the-repository-on-github" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="create-the-repository-on-github"><span class="header-section-number">1.3</span> Create the repository on GitHub</h2>
+<p>With the project under version control, one call creates the repository in your organisation, connects it to your project and pushes the first commit:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_github</span>(<span class="at">organisation =</span> <span class="st">"openwashdata"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="callout-title-container flex-fill">
-Warning
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Replace <code>REPO</code> with the name of your newly created repository.</p>
-</div>
-</div>
-<pre><code>git remote add origin "https://github.com/Global-Health-Engineering/REPO.git" 
-
+<p>Replace the organisation with the one you publish under. The repository is public, which is right for data that holds nothing confidential or personal. <a href="data_preparation.html" class="quarto-xref"><span>Chapter 2</span></a> covers that check before any data is pushed. The call needs a GitHub token with permission to create repositories in the organisation. <code>usethis::gh_token_help()</code> explains how to get one.</p>
+<p>If the call fails, create the repository by hand. Go to the organisation page on GitHub, click “New repository”, give it the package name, keep it empty (no README, no .gitignore file, no license, they are added later) and create it. Then switch to the Terminal tab in RStudio, next to the Console, and connect the two, with <code>ORGANISATION</code> and <code>REPO</code> replaced:</p>
+<pre><code>git remote add origin "https://github.com/ORGANISATION/REPO.git"
 git branch -M main
-
 git push -u origin main</code></pre>
-<p>If everything went well, your local repository (on your computer) should now be connected to the remote repository (on GitHub) which allows you to push and pull changes and to invite collaborators.</p>
+<p>Afterwards, run <code>usethis::use_github_links()</code> once, so that <code>DESCRIPTION</code> names the repository. <code>use_github()</code> does this on its own.</p>
+<p>Either way, your local repository on your computer is now connected to the remote repository on GitHub, so you can push and pull changes and invite collaborators.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/repos.png" class="quarto-figure quarto-figure-center figure-img" style="border: 1px solid black;;width:40.0%;height:40.0%"></p>
 </figure>
 </div>
+</section>
+<section id="add-the-check-that-runs-on-every-push" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="add-the-check-that-runs-on-every-push"><span class="header-section-number">1.4</span> Add the check that runs on every push</h2>
+<p>washr writes a GitHub Actions workflow that runs <code>R CMD check</code> on every push and pull request, on macOS, Windows and three versions of R on Linux. The openwashdata review standard requires it, so add it now and the package meets that part of the standard from its first commit:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(washr)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setup_ci</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The workflow lands in <code>.github/workflows/R-CMD-check.yaml</code>. Commit it and push.</p>
+</section>
+<section id="committing-and-pushing-from-rstudio" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="committing-and-pushing-from-rstudio"><span class="header-section-number">1.5</span> Committing and pushing from RStudio</h2>
+<p>The chapters that follow end each step with a commit and a push. In RStudio, open the Git tab in the top right panel. Click “Pull” first, so that you have the latest changes. Tick the boxes next to the files you added or changed and click “Commit”. A window opens. Write a short message that says what changed, for example “Add raw data files”, and click “Commit”. Then click “Push” to upload the commit to GitHub.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -385,7 +401,7 @@ git push -u origin main</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/global-health-engineering\.github\.io\/ghedatapublishing\/");
+        var filterRegex = new RegExp("https:\/\/openwashdata\.github\.io\/fair-publishing\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -719,8 +735,8 @@ git push -u origin main</code></pre>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./data_preparation.html" class="pagination-link" aria-label="Preparing your dataset">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preparing your dataset</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./data_preparation.html" class="pagination-link" aria-label="Preparing the data">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preparing the data</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -728,11 +744,11 @@ git push -u origin main</code></pre>
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Data Publishing with <code>washr</code> was written by the <a href="https://openwashdata.org/about#team"> Open Science Team </a> at <a href="https://ghe.ethz.ch/"> GHE </a></p>
+<p>FAIR Data Publishing is maintained by the <a href="https://openwashdata.org/about#team">openwashdata team</a> at <a href="https://ghe.ethz.ch/">Global Health Engineering</a>, ETH Zurich</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/Global-Health-Engineering/ghedatapublishing/edit/main/creating_repo.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Global-Health-Engineering/ghedatapublishing/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openwashdata/fair-publishing/edit/main/creating_repo.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openwashdata/fair-publishing/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
 </div>

@@ -1,23 +1,25 @@
 project:
   type: book
   output-dir: docs
-  
-execute: 
+
+execute:
   eval: false
 
 book:
-  title: "Data Publishing with `washr`"
+  title: "FAIR Data Publishing"
+  subtitle: "Publishing a dataset as an R data package with washr"
+  output-file: fair-data-publishing
   search: true
   cover-image: owd-cover.png
   favicon: owd-cover.png
-  page-footer: 
+  page-footer:
     left: |
-      Data Publishing with `washr` was written by the <a href="https://openwashdata.org/about#team"> Open Science Team </a> at <a href="https://ghe.ethz.ch/"> GHE </a>
+      FAIR Data Publishing is maintained by the <a href="https://openwashdata.org/about#team">openwashdata team</a> at <a href="https://ghe.ethz.ch/">Global Health Engineering</a>, ETH Zurich
     right: |
       This book was built with <a href="https://quarto.org/">Quarto</a>
-  
-  site-url: https://global-health-engineering.github.io/ghedatapublishing/
-  repo-url: https://github.com/Global-Health-Engineering/ghedatapublishing
+
+  site-url: https://openwashdata.github.io/fair-publishing/
+  repo-url: https://github.com/openwashdata/fair-publishing
   repo-branch: main
   repo-actions: [edit, issue]
   downloads: [pdf]
@@ -37,4 +39,3 @@ format:
     theme: pulse
   pdf:
     documentclass: scrreprt
-    

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4&nbsp; Publishing Your Dataset – Data Publishing with `washr`</title>
+<title>4&nbsp; Publishing the data – FAIR Data Publishing</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -124,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data_publication.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Publishing Your Dataset</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data_publication.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Publishing the data</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -139,10 +139,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Data Publishing with <code>washr</code></a> 
+      <a href="./">FAIR Data Publishing</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/Global-Health-Engineering/ghedatapublishing" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <a href="./Data-Publishing-with-`washr`.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="https://github.com/openwashdata/fair-publishing" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./fair-data-publishing.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -179,31 +179,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./creating_repo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Creating a repository</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Creating the package and its repository</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data_preparation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preparing your dataset</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preparing the data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data_documentation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Documenting Your Dataset</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Documenting the data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./data_publication.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Publishing Your Dataset</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Publishing the data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./creating_doi.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Creating a DOI and connecting it to GitHub</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Creating a release and a DOI</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -222,32 +222,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#creating-and-editing-the-readme" id="toc-creating-and-editing-the-readme" class="nav-link active" data-scroll-target="#creating-and-editing-the-readme"><span class="header-section-number">4.1</span> Creating and Editing the README</a>
+  <li><a href="#write-the-readme" id="toc-write-the-readme" class="nav-link active" data-scroll-target="#write-the-readme"><span class="header-section-number">4.1</span> Write the README</a>
   <ul class="collapse">
-  <li><a href="#initialize-the-readme" id="toc-initialize-the-readme" class="nav-link" data-scroll-target="#initialize-the-readme"><span class="header-section-number">4.1.1</span> Initialize the README</a></li>
-  <li><a href="#editing-the-readme" id="toc-editing-the-readme" class="nav-link" data-scroll-target="#editing-the-readme"><span class="header-section-number">4.1.2</span> Editing the README</a></li>
-  <li><a href="#creating-a-data-visualization" id="toc-creating-a-data-visualization" class="nav-link" data-scroll-target="#creating-a-data-visualization"><span class="header-section-number">4.1.3</span> Creating a Data Visualization</a></li>
-  <li><a href="#building-the-readme" id="toc-building-the-readme" class="nav-link" data-scroll-target="#building-the-readme"><span class="header-section-number">4.1.4</span> Building the README</a></li>
-  <li><a href="#updating-github" id="toc-updating-github" class="nav-link" data-scroll-target="#updating-github"><span class="header-section-number">4.1.5</span> Updating GitHub</a></li>
+  <li><a href="#create-it-from-the-template" id="toc-create-it-from-the-template" class="nav-link" data-scroll-target="#create-it-from-the-template"><span class="header-section-number">4.1.1</span> Create it from the template</a></li>
+  <li><a href="#write-the-text" id="toc-write-the-text" class="nav-link" data-scroll-target="#write-the-text"><span class="header-section-number">4.1.2</span> Write the text</a></li>
+  <li><a href="#build-it" id="toc-build-it" class="nav-link" data-scroll-target="#build-it"><span class="header-section-number">4.1.3</span> Build it</a></li>
   </ul></li>
-  <li><a href="#setting-up-the-package-website" id="toc-setting-up-the-package-website" class="nav-link" data-scroll-target="#setting-up-the-package-website"><span class="header-section-number">4.2</span> Setting Up the Package Website</a>
+  <li><a href="#build-the-website" id="toc-build-the-website" class="nav-link" data-scroll-target="#build-the-website"><span class="header-section-number">4.2</span> Build the website</a>
   <ul class="collapse">
-  <li><a href="#initializing-the-website" id="toc-initializing-the-website" class="nav-link" data-scroll-target="#initializing-the-website"><span class="header-section-number">4.2.1</span> Initializing the Website</a></li>
-  <li><a href="#applying-the-openwashdata-brand" id="toc-applying-the-openwashdata-brand" class="nav-link" data-scroll-target="#applying-the-openwashdata-brand"><span class="header-section-number">4.2.2</span> Applying the openwashdata brand</a></li>
-  <li><a href="#document-check-and-install-the-package" id="toc-document-check-and-install-the-package" class="nav-link" data-scroll-target="#document-check-and-install-the-package"><span class="header-section-number">4.2.3</span> Document, Check, and Install the Package</a></li>
-  <li><a href="#preparing-for-github-pages" id="toc-preparing-for-github-pages" class="nav-link" data-scroll-target="#preparing-for-github-pages"><span class="header-section-number">4.2.4</span> Preparing for GitHub Pages</a></li>
-  <li><a href="#updating-github-with-website-files" id="toc-updating-github-with-website-files" class="nav-link" data-scroll-target="#updating-github-with-website-files"><span class="header-section-number">4.2.5</span> Updating GitHub with Website Files</a></li>
-  <li><a href="#setting-up-github-pages" id="toc-setting-up-github-pages" class="nav-link" data-scroll-target="#setting-up-github-pages"><span class="header-section-number">4.2.6</span> Setting Up GitHub Pages</a></li>
+  <li><a href="#add-the-deployment-workflow" id="toc-add-the-deployment-workflow" class="nav-link" data-scroll-target="#add-the-deployment-workflow"><span class="header-section-number">4.2.1</span> Add the deployment workflow</a></li>
+  <li><a href="#write-the-configuration-and-build-the-site" id="toc-write-the-configuration-and-build-the-site" class="nav-link" data-scroll-target="#write-the-configuration-and-build-the-site"><span class="header-section-number">4.2.2</span> Write the configuration and build the site</a></li>
+  <li><a href="#apply-the-brand" id="toc-apply-the-brand" class="nav-link" data-scroll-target="#apply-the-brand"><span class="header-section-number">4.2.3</span> Apply the brand</a></li>
+  <li><a href="#check-commit-and-publish" id="toc-check-commit-and-publish" class="nav-link" data-scroll-target="#check-commit-and-publish"><span class="header-section-number">4.2.4</span> Check, commit and publish</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Global-Health-Engineering/ghedatapublishing/edit/main/data_publication.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Global-Health-Engineering/ghedatapublishing/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/openwashdata/fair-publishing/edit/main/data_publication.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openwashdata/fair-publishing/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-datapublication" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Publishing Your Dataset</span></span></h1>
+<h1 class="title"><span id="sec-datapublication" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Publishing the data</span></span></h1>
 </div>
 
 
@@ -264,100 +260,82 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="creating-and-editing-the-readme" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="creating-and-editing-the-readme"><span class="header-section-number">4.1</span> Creating and Editing the README</h2>
-<p>To start documenting your dataset for publication, you first need to set up a README file.</p>
-<section id="initialize-the-readme" class="level3" data-number="4.1.1">
-<h3 data-number="4.1.1" class="anchored" data-anchor-id="initialize-the-readme"><span class="header-section-number">4.1.1</span> Initialize the README</h3>
-<p>In your R console, within the project directory, run the following command to create a README file:</p>
+<p>The package now has data, a dictionary, help pages and metadata. This chapter writes the README that GitHub shows on the repository page and builds the website that presents the dataset.</p>
+<section id="write-the-readme" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="write-the-readme"><span class="header-section-number">4.1</span> Write the README</h2>
+<section id="create-it-from-the-template" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="create-it-from-the-template"><span class="header-section-number">4.1.1</span> Create it from the template</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setup_readme</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setup_readme</span>(<span class="at">has_example =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>If you want the README to include an Example section with a scaffold for a first plot of your data, use this command instead:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setup_readme</span>(<span class="at">has_example =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>The template documents the first data object in <code>data/</code>. When your package holds several, copy the data section once per further object.</p>
+<p>washr writes <code>README.Rmd</code> from its template. The file holds the title and badges, an introduction placeholder, the installation instructions, a download table with one row per dataset and links to the CSV and XLSX exports, a section for the first dataset with its dimensions, a preview and the variable table from the dictionary, an Example section with a scaffold for a first plot, the license, and a citation section that names the version and the DOI in plain text once they exist. Without <code>has_example = TRUE</code> the Example section is left out.</p>
 </section>
-<section id="editing-the-readme" class="level3" data-number="4.1.2">
-<h3 data-number="4.1.2" class="anchored" data-anchor-id="editing-the-readme"><span class="header-section-number">4.1.2</span> Editing the README</h3>
-<p>Locate the <code>README.Rmd</code> file in your project directory and open it. Edit each section of the README to provide relevant information about your package. Typical sections include:</p>
+<section id="write-the-text" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="write-the-text"><span class="header-section-number">4.1.2</span> Write the text</h3>
+<p>Open <code>README.Rmd</code> and fill in the parts that are yours.</p>
 <ul>
-<li><strong>Package Name and Brief Description</strong></li>
-<li><strong>Installation Instructions</strong></li>
-<li><strong>Basic Usage</strong></li>
-<li><strong>Features</strong></li>
-<li><strong>Example</strong></li>
+<li>The introduction. One paragraph of three to five sentences in place of “The goal of … is to”. Say who collected the data, how, when and where, and under which license or permission the source data was shared.</li>
+<li>The data sentence. Complete “The dataset … contains data about”.</li>
+<li>A block per further dataset. The template documents the first dataset in <code>data/</code>. For each further one, copy the block from its heading to the end of its variable table and replace the dataset name in the heading, in the sentence, in the preview chunk and in the filter of the variable table.</li>
+<li>The example. The plot code is commented out. Fill in variables of your dataset, write readable axis labels and a title, and uncomment the block together with the <code>library(ggplot2)</code> line. One plot that gives a useful first look at the data is enough. Say in the text what the plot shows.</li>
 </ul>
+<p>The installation instructions, the download table, the dimensions, the previews, the variable tables, the license and the citation are generated. Leave them as they are.</p>
 </section>
-<section id="creating-a-data-visualization" class="level3" data-number="4.1.3">
-<h3 data-number="4.1.3" class="anchored" data-anchor-id="creating-a-data-visualization"><span class="header-section-number">4.1.3</span> Creating a Data Visualization</h3>
-<p>In the “Example” section of your README, it’s helpful to include at least one plot that showcases your data. The section written by <code>setup_readme(has_example = TRUE)</code> holds a commented scaffold for it. For instance, using <code>ggplot2</code>, you could create a plot like this (adapt it to fit your specific data):</p>
+<section id="build-it" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="build-it"><span class="header-section-number">4.1.3</span> Build it</h3>
+<p><code>README.md</code> is built from <code>README.Rmd</code> and never edited by hand:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(yourpackagename)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(your_data, <span class="fu">aes</span>(<span class="at">x =</span> variable1, <span class="at">y =</span> variable2)) <span class="sc">+</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Example Plot from YourPackageName"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">build_readme</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The build loads the packages named in the installation chunk (dplyr, knitr, readr, stringr, gt and kableExtra), so install the ones you are missing when the build stops. Commit both README files and push. GitHub shows <code>README.md</code> on the repository page.</p>
+</section>
+</section>
+<section id="build-the-website" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="build-the-website"><span class="header-section-number">4.2</span> Build the website</h2>
+<p>The website is built by <a href="https://pkgdown.r-lib.org/">pkgdown</a> from the README, the help pages and the metadata. The review standard has it deployed by a GitHub Actions workflow to the <code>gh-pages</code> branch of the repository, so that the built site is never committed and never goes stale. Set up the workflow first, then let washr write the configuration and build.</p>
+<section id="add-the-deployment-workflow" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="add-the-deployment-workflow"><span class="header-section-number">4.2.1</span> Add the deployment workflow</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_github_action</span>(<span class="st">"pkgdown"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The call writes the workflow <code>.github/workflows/pkgdown.yaml</code>. It runs on every push to the main branch, builds the site and writes it to the <code>gh-pages</code> branch. Nothing else changes yet.</p>
+</section>
+<section id="write-the-configuration-and-build-the-site" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="write-the-configuration-and-build-the-site"><span class="header-section-number">4.2.2</span> Write the configuration and build the site</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setup_website</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The first run writes <code>_pkgdown.yml</code> from the washr template, with the address of the site, the analytics header, the funding sentence in the sidebar and a reference index with one entry per dataset. Every value comes from <code>DESCRIPTION</code>. Then it builds the site into <code>docs/</code>, which takes a minute. Because the deployment workflow exists, <code>docs/</code> stays in <code>.gitignore</code>, and the local build is a preview. Open <code>docs/index.html</code> in a browser to see it. Every later run keeps <code>_pkgdown.yml</code> as it is and rebuilds the site.</p>
+<p>pkgdown expects the address of the site in <code>DESCRIPTION</code> as well, next to the repository URL. Add it, with the value of the <code>url</code> line of <code>_pkgdown.yml</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>desc<span class="sc">::</span><span class="fu">desc_add_urls</span>(<span class="st">"https://openwashdata.github.io/yourpackagename"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A repository that cannot run GitHub Actions can serve the site from the main branch instead. Skip the workflow and run <code>setup_website()</code>. Without a workflow it removes <code>docs</code> from <code>.gitignore</code>, so that the built site is committed. In the Pages settings of the repository, choose the main branch and the <code>/docs</code> folder as the source. The review standard prefers the workflow, because a committed site is only as current as its last build.</p>
+</div>
 </div>
 </section>
-<section id="building-the-readme" class="level3" data-number="4.1.4">
-<h3 data-number="4.1.4" class="anchored" data-anchor-id="building-the-readme"><span class="header-section-number">4.1.4</span> Building the README</h3>
-<p>Once you’ve completed editing the README, convert it to a Markdown file by running:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">build_readme</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>This will generate a <code>README.md</code> file, which GitHub displays on your repository’s main page.</p>
-</section>
-<section id="updating-github" class="level3" data-number="4.1.5">
-<h3 data-number="4.1.5" class="anchored" data-anchor-id="updating-github"><span class="header-section-number">4.1.5</span> Updating GitHub</h3>
-<p>After building the README, go to the “Git” tab in RStudio. Stage the newly created or modified README files, commit them with a message such as “Add and update README,” and push the changes to GitHub.</p>
-</section>
-</section>
-<section id="setting-up-the-package-website" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="setting-up-the-package-website"><span class="header-section-number">4.2</span> Setting Up the Package Website</h2>
-<p>To enhance your package’s accessibility, you can create a website for it.</p>
-<section id="initializing-the-website" class="level3" data-number="4.2.1">
-<h3 data-number="4.2.1" class="anchored" data-anchor-id="initializing-the-website"><span class="header-section-number">4.2.1</span> Initializing the Website</h3>
-<p>Run the following command in your R console:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setup_website</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>The first run writes <code>_pkgdown.yml</code> from the openwashdata template and builds the site into <code>docs/</code>. Every later run keeps your <code>_pkgdown.yml</code> as it is and rebuilds the site, so there is nothing to answer.</p>
-</section>
-<section id="applying-the-openwashdata-brand" class="level3" data-number="4.2.2">
-<h3 data-number="4.2.2" class="anchored" data-anchor-id="applying-the-openwashdata-brand"><span class="header-section-number">4.2.2</span> Applying the openwashdata brand</h3>
-<p>To give the site the openwashdata fonts and colors, run:</p>
+<section id="apply-the-brand" class="level3" data-number="4.2.3">
+<h3 data-number="4.2.3" class="anchored" data-anchor-id="apply-the-brand"><span class="header-section-number">4.2.3</span> Apply the brand</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">use_brand</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>This copies the brand file and the logos from the central brand repository into your package and points <code>_pkgdown.yml</code> at them. Run it again whenever the brand changes.</p>
+<p>This copies the brand file and the logos of the openwashdata brand from the latest release of the brand repository into your package, adds them to <code>.Rbuildignore</code>, wires <code>_pkgdown.yml</code> to them and records the release in <code>DESCRIPTION</code>. The site now uses the openwashdata fonts and colours. Run it again after a new brand release. A run with no new release changes nothing. For a package under another organisation, the <code>Config/washr/brand-source</code> field in <code>DESCRIPTION</code> names the brand repository to copy from, or <code>none</code>.</p>
 </section>
-<section id="document-check-and-install-the-package" class="level3" data-number="4.2.3">
-<h3 data-number="4.2.3" class="anchored" data-anchor-id="document-check-and-install-the-package"><span class="header-section-number">4.2.3</span> Document, Check, and Install the Package</h3>
-<p>Ensure your package is up-to-date by running the following commands:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">document</span>()</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">check</span>()</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>These commands generate the latest documentation, check the package for issues, and install it locally.</p>
-</section>
-<section id="preparing-for-github-pages" class="level3" data-number="4.2.4">
-<h3 data-number="4.2.4" class="anchored" data-anchor-id="preparing-for-github-pages"><span class="header-section-number">4.2.4</span> Preparing for GitHub Pages</h3>
-<p>To host the package website on GitHub Pages, Git has to track the built site. <code>setup_website()</code> removes the <code>docs</code> line from <code>.gitignore</code> for you, so the <code>docs/</code> folder is tracked. Check that the line is gone before you commit.</p>
-</section>
-<section id="updating-github-with-website-files" class="level3" data-number="4.2.5">
-<h3 data-number="4.2.5" class="anchored" data-anchor-id="updating-github-with-website-files"><span class="header-section-number">4.2.5</span> Updating GitHub with Website Files</h3>
-<p>Go to the “Git” tab in RStudio. You should now see new files in the <code>docs/</code> folder and the updated <code>.gitignore</code> file. Stage these changes, commit them with a message like “Add pkgdown website files,” and push the updates to GitHub.</p>
-</section>
-<section id="setting-up-github-pages" class="level3" data-number="4.2.6">
-<h3 data-number="4.2.6" class="anchored" data-anchor-id="setting-up-github-pages"><span class="header-section-number">4.2.6</span> Setting Up GitHub Pages</h3>
-<p>To activate the website, open your GitHub repository in a web browser. Go to “Settings” &gt; “Pages.” Under “Source,” select the branch where your <code>docs/</code> folder resides (usually “main” or “master”) and set the folder to <code>/docs</code>. Finally, click “Save.”</p>
-<p>Your package website will now be live at <code>https://yourusername.github.io/yourrepositoryname/</code>.</p>
-<p>Remember, if you make significant changes to your package or documentation, you may need to rebuild the website by running <code>pkgdown::build_site()</code> and pushing the updated <code>docs/</code> folder to GitHub.</p>
+<section id="check-commit-and-publish" class="level3" data-number="4.2.4">
+<h3 data-number="4.2.4" class="anchored" data-anchor-id="check-commit-and-publish"><span class="header-section-number">4.2.4</span> Check, commit and publish</h3>
+<p>Run <code>devtools::document()</code>, <code>devtools::check()</code> and <code>devtools::install()</code> once more, then commit everything and push. The push starts the pkgdown workflow on GitHub, which builds the site and writes it to the <code>gh-pages</code> branch. The branch appears with the first run, after a few minutes.</p>
+<p>Then open the repository on GitHub, go to “Settings” and “Pages”, and under “Build and deployment” choose “Deploy from a branch”, with the <code>gh-pages</code> branch and the root folder as the source. The site is live at the address in <code>_pkgdown.yml</code> a minute later, and every later push rebuilds it.</p>
+<p>Reports about the package in the openwashdata look, as PDF or Word documents, use the <a href="https://github.com/openwashdata/quarto-owd">quarto-owd</a> Quarto extension. It reads the brand file that <code>use_brand()</code> installed.</p>
 
 
 </section>
@@ -437,7 +415,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/global-health-engineering\.github\.io\/ghedatapublishing\/");
+        var filterRegex = new RegExp("https:\/\/openwashdata\.github\.io\/fair-publishing\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -766,13 +744,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./data_documentation.html" class="pagination-link" aria-label="Documenting Your Dataset">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Documenting Your Dataset</span></span>
+      <a href="./data_documentation.html" class="pagination-link" aria-label="Documenting the data">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Documenting the data</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./creating_doi.html" class="pagination-link" aria-label="Creating a DOI and connecting it to GitHub">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Creating a DOI and connecting it to GitHub</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./creating_doi.html" class="pagination-link" aria-label="Creating a release and a DOI">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Creating a release and a DOI</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -780,11 +758,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Data Publishing with <code>washr</code> was written by the <a href="https://openwashdata.org/about#team"> Open Science Team </a> at <a href="https://ghe.ethz.ch/"> GHE </a></p>
+<p>FAIR Data Publishing is maintained by the <a href="https://openwashdata.org/about#team">openwashdata team</a> at <a href="https://ghe.ethz.ch/">Global Health Engineering</a>, ETH Zurich</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Global-Health-Engineering/ghedatapublishing/edit/main/data_publication.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Global-Health-Engineering/ghedatapublishing/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/openwashdata/fair-publishing/edit/main/data_publication.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openwashdata/fair-publishing/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a></p>
 </div>
