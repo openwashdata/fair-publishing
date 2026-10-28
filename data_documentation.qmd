@@ -1,51 +1,26 @@
-# Documenting Your Dataset {#sec-datadocumentation}
+# Documenting the data {#sec-datadocumentation}
 
 ```{r, include=FALSE}
 library(washr)
 ```
 
-In the next steps, the goal is to document not only the dataset itself but also the functions and the package as a whole. The individual steps are visualized in the figure below.
+The dictionary describes the variables. This chapter turns it into help pages, completes the description of the package as a whole and generates the machine readable metadata that dataset search engines read.
 
-![](images/documenting.png){fig-align="center" style="border: 1px solid black;"}
+## Write the help pages
 
-## Setting Up and Writing Documentation with Roxygen
-
-To begin documenting your dataset, start by initializing Roxygen documentation. Open your R console within the project and run the following command:
+Every dataset in an R package has a help page. washr writes its source from the dictionary:
 
 ```{r}
 setup_roxygen()
 ```
 
-This will create the necessary documentation files in the `R/` folder of your project, setting up the foundation for detailed documentation.
+This creates one file per dataset under `R/`, with a title placeholder, a description placeholder and the variable table from the dictionary, written as roxygen comments (lines that start with `#'`).
 
-### Writing Documentation
+Open each file and replace the two placeholders. The title is a human readable name of the dataset, on one line. The description is a brief statement of what the dataset contains and what it is for. Then add a `@source` line above the quoted dataset name at the end of the file. It names who collected the data, a URL or a reference, and the date you accessed it. For a data package, the source is the most important field of the help page after the description.
 
-Once the documentation files are generated, navigate to the `R/` folder in your project. Each file in this folder, with a `.R` extension, represents a dataset or function. Open these files and provide a human-readable title and description using Roxygen comments (lines that start with `#'`). For instance, you could use the following format to document your dataset:
+The lines from `@format` to the closing brace are generated from the dictionary. Do not edit them. When a description changes, change it in the dictionary and run `setup_roxygen()` again. It regenerates only the variable table and keeps the title, the description and the source you wrote.
 
-```
-#' Title of Your Dataset
-#'
-#' A brief description of what the dataset contains and its purpose.
-#'
-#' @format A data frame with X rows and Y columns:
-#' \describe{
-#'   \item{column1}{Description of column1}
-#'   \item{column2}{Description of column2}
-#'   ...
-#' }
-#' @source Where the data comes from (if applicable)
-"dataset_name"
-```
-
-This method allows you to provide clear, concise details about each dataset, ensuring that users understand its structure and purpose.
-
-### Updating Your GitHub Repository
-
-Once you've completed the documentation, it’s time to update your GitHub repository. In RStudio, go to the "Git" tab. Stage all the changed files by checking the boxes next to them, then click "Commit". Write a meaningful commit message, such as "Add Roxygen documentation for dataset", and click "Push" to update your repository with the latest changes.
-
-### Finalizing and Installing the Documentation
-
-Now that your documentation is written, run the following commands in your R console:
+Then build the help pages, check the package and install it:
 
 ```{r}
 devtools::document()
@@ -53,65 +28,45 @@ devtools::check()
 devtools::install()
 ```
 
-These commands will generate the documentation from your Roxygen comments, check for any issues in the package, and install it locally. If you receive a warning about the license, don’t worry, as it will be addressed in the next section.
+`devtools::document()` writes the help pages to `man/`. `devtools::check()` runs the same check as the workflow on GitHub. A warning about the license is expected at this point and goes away in the next section. `devtools::install()` installs the package on your computer, so that the README and the website can load the data.
 
-## Updating the DESCRIPTION File
+Commit and push.
 
-To complete your package documentation, you’ll need to update the `DESCRIPTION` file with author information and other key details.
+## Complete the DESCRIPTION file
 
-### Adding Yourself as an Author
+`DESCRIPTION` describes the package as a whole, with its title, what it contains, who made it and under which license. The citation files, the README, the website and the metadata all read from it, so a value that is wrong here is wrong everywhere. Fix it here and never in a generated file.
 
-In your R console, add yourself as the author and maintainer by running:
+### Authors
+
+Add yourself as author and maintainer:
 
 ```{r}
 usethis::use_author(
-  given = "Your First Name", 
-  family = "Your Last Name", 
-  role = c("aut", "cre"), 
+  given = "Your First Name",
+  family = "Your Last Name",
+  role = c("aut", "cre"),
   email = "your.email@example.com",
-  comment = c(ORCID = "XXXX-XXXX-XXXX-XXXX")
+  comment = c(ORCID = "0000-0000-0000-0000")
 )
 ```
 
-Here, `aut` indicates that you are an author, and `cre` designates you as the creator or maintainer of the package.
+`aut` marks an author and `cre` the maintainer, the person who receives questions about the package. The ORCID iD reaches the citation files, the Zenodo record and the metadata, so give it when you have one.
 
-### Documenting Other Contributors
+Add every other person who contributed with the same call, with `role = "aut"` for an author and `role = "ctb"` for a contributor. To collect the names, email addresses, roles and ORCID iDs, open an issue in the repository titled "Author information for DESCRIPTION" and ask everyone to add their line.
 
-To ensure proper credit is given, create a new issue in your GitHub repository titled "Author Information for DESCRIPTION File". List all contributors, including their full name, email address, role (e.g., `aut` for authors or `ctb` for contributors), and ORCID (if applicable).
-
-For each additional contributor, run a similar command:
-
-```{r}
-usethis::use_author(given = "Coauthor First Name", family = "Coauthor Last Name", role = "aut")
-```
-
-### Updating the DESCRIPTION File
-
-After adding all contributors, open the `DESCRIPTION` file in your project and ensure the title and description reflect the purpose of your package accurately. Then, in your R console, run:
+### The fields washr writes
 
 ```{r}
 update_description()
 ```
 
-This will update fields such as version, authors, and dependencies. Review the `DESCRIPTION` file to make sure all information is accurate.
+The call sets the fields the review standard expects and keeps every value that is already there. It writes the language, the date, the repository and bug report URLs, which it takes from the repository named in `DESCRIPTION`, and the CC BY 4.0 license when the package has none yet. It also writes a few `Config/washr/` fields, such as the funding sentence of the website and the analytics domain, with the openwashdata values for a package under openwashdata. The later steps read them from `DESCRIPTION`. The vignette section [Publishing outside openwashdata](https://openwashdata.github.io/washr/articles/washr.html#publishing-outside-openwashdata) explains how another organisation sets its own values.
 
-### Documentation Check
+Now open `DESCRIPTION` and write the title and the description. The title is one line in title case without a final period. The description is one paragraph that says what the data contains, where it comes from and when it was collected.
 
-To complete the process, run the following commands again:
+### Keywords, coverage and source
 
-```{r}
-devtools::document()
-devtools::check()
-devtools::install()
-```
-
-## FAIR Documentation
-
-One function derives the machine readable metadata of your package from the files you have already written: `DESCRIPTION`, `data-raw/dictionary.csv`, `CITATION.cff` and the exports in `inst/extdata`. Nothing is edited by hand; when a value is wrong, change its source and run the function again.
-
-### Keywords and coverage
-
-Three facts have no other home, so they live in `DESCRIPTION`. Open the file and add three lines, with your own values:
+Three facts have no other home and go into `DESCRIPTION` by hand. Add three lines with your own values:
 
 ```
 X-schema.org-keywords: sanitation, faecal sludge, Kampala
@@ -119,28 +74,28 @@ X-schema.org-spatialCoverage: Kampala, Uganda
 X-schema.org-temporalCoverage: 2022-03-01/2022-09-30
 ```
 
-The keywords are a comma separated list. The spatial coverage is a place name. The temporal coverage is the first and the last date of the data, separated by a slash.
+The keywords are a comma separated list. For an openwashdata package, start with `open data` and `washdata`, then add the topic and the country or region. The spatial coverage is a place name. The temporal coverage is the first and the last date of the data, separated by a slash.
 
-### Generating the metadata
+When the data comes from a published article, add its DOI as well:
 
-In your R console run:
+```
+X-schema.org-isBasedOn: https://doi.org/10.2166/wh.2026.173
+```
+
+The citation files then cite the article next to the data package, and the metadata records it as the source. Several DOIs are separated by commas.
+
+Run `devtools::document()`, `devtools::check()` and `devtools::install()` again, then commit and push.
+
+## Generate the metadata
+
+One function derives the machine readable metadata of your package from the files you have already written, which are `DESCRIPTION`, the dictionary, the citation file and the exports in `inst/extdata/`.
 
 ```{r}
 update_metadata()
 ```
 
-The function writes a schema.org description of your dataset as JSON-LD into `pkgdown/templates/in-header.html`. The website build in the next chapter embeds it in the head of every page, where dataset search engines such as Google Dataset Search read it. The function ends with a list of the fields it could not fill and where to fill them.
+It writes a schema.org description of the dataset as JSON-LD into `pkgdown/templates/in-header.html`. The website build in the next chapter embeds it in the head of every page, where dataset search engines such as Google Dataset Search read it. The function ends with the fields it could not fill and where to fill them. Before the release, the DOI is the one field that stays blank.
 
-Run it again after every change to `DESCRIPTION`, the dictionary or the exports, and once more after the DOI exists (see @sec-doi). A second run with nothing changed writes nothing.
+Nothing in this file is edited by hand. When a value is wrong, change its source and run the function again. Run it again after every change to `DESCRIPTION`, the dictionary or the exports, and once more after the DOI exists (@sec-doi). A second run with nothing changed writes nothing.
 
-### Final Documentation Check
-
-To complete the process, run the following commands again:
-
-```{r}
-devtools::document()
-devtools::check()
-devtools::install()
-```
-
-These steps will ensure your package is fully documented, checked for errors, and ready for use. 
+Commit and push.

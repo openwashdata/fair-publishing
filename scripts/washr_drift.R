@@ -35,7 +35,13 @@ recorded_exports <- function(version) {
   ns <- readLines(file.path(tempdir(), "washr", "NAMESPACE"), warn = FALSE)
   sub("^export\\((.*)\\)$", "\\1", grep("^export\\(", ns, value = TRUE))
 }
-rec_exports <- recorded_exports(recorded)
+rec_exports <- tryCatch(recorded_exports(recorded), error = function(e) {
+  # The recorded release is not on CRAN yet (a release checked from GitHub
+  # before the CRAN submission): take its exports from the installed package.
+  if (!identical(installed, recorded)) stop(e)
+  cat(sprintf("note: washr %s is not on CRAN; the recorded exports are taken from the installed package\n", recorded))
+  getNamespaceExports("washr")
+})
 exports <- getNamespaceExports("washr")
 
 # Every function call in the R chunks: file, line, package prefix, name, named arguments.

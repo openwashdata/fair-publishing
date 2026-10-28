@@ -1,38 +1,62 @@
-# Creating a DOI and connecting it to GitHub {#sec-doi}
+# Creating a release and a DOI {#sec-doi}
 
-This chapter guides you through the process of creating a Digital Object Identifier (DOI) and connecting it to your GitHub repository. 
+```{r, include=FALSE}
+library(washr)
+```
 
-## Setting Up Your Repository on Zenodo
+A Digital Object Identifier (DOI) makes the dataset citable. It points at a fixed version of the data in an archive that outlives the repository. [Zenodo](https://zenodo.org/) assigns one for every release of a GitHub repository it watches. This chapter writes the citation files, checks that the package is ready, creates the release and brings the DOI back into the package.
 
-Begin by accessing your [Zenodo](https://zenodo.org/) account through your GitHub credentials. Once logged in, you'll need to establish the connection between Zenodo and your GitHub repository. To do so, navigate to the settings by clicking the dropdown menu next to your email address in the top right corner and select "GitHub" from the options.
+## Write the citation files
 
-You'll see a list of your GitHub repositories. Locate the repository you want to publish and activate it by flipping the switch to "ON". Click on the repository link to access its settings. This connection allows Zenodo to track your repository's releases and create corresponding archives.
+```{r}
+update_citation()
+```
 
-### Creating Your First Release
+The call writes three files from `DESCRIPTION`. `CITATION.cff` is what GitHub reads for its "Cite this repository" button. `inst/CITATION` is what `citation("yourpackagename")` prints in R. `.zenodo.json` is what Zenodo reads when it archives a release. From that file Zenodo takes the resource type (Dataset), the openwashdata community, the creators with their ORCID iDs, the license and the keywords, so that the record needs no edits by hand. When `DESCRIPTION` names a source article in `X-schema.org-isBasedOn`, the citation files cite it next to the data package.
 
-With the connection established, return to GitHub and create your initial release. Label it as version 0.0.1 and mark it as the "initial package release". This triggers Zenodo to create an archive of your repository. Return to the Zenodo GitHub settings page to obtain your DOI badge, which you'll need for documentation.
+Commit the three files and push. Zenodo reads `.zenodo.json` from the release, so it has to be in the repository before the release is created.
 
-### Configuring Your Zenodo Entry
+## Check that the package is ready
 
-Open your entry on Zenodo and click the "Edit" button. You'll need to make several important modifications to ensure your package is properly categorized and accessible:
+```{r}
+check_publication_readiness()
+```
 
-1. Locate the "Additional Notes" section and replace any existing text with a link to your GitHub pages website. 
-2. Adjust the upload type from "Software" to "Dataset" to properly categorize your submission. Under "Related identifiers", remove the current release link entry and add your GitHub pages URL, specifying that it "is compiled/created by this upload" and categorizing it as a Dataset.
+The function reads the package and reports, item by item, what is in place and what is missing. It covers the metadata, the dictionary, the documentation, the citation files and the check workflow, and for every gap it names the step that closes it. It writes nothing, so run it as often as you like, and go back to the chapter it points to until no item fails. Before the first release, the DOI is the one expected gap.
 
-## Documentation Updates in RStudio
+## Connect the repository to Zenodo
 
-After configuring Zenodo, switch to RStudio. Update the version number in your DESCRIPTION file so it matches the release. Then write the DOI into the citation files (`CITATION.cff` and `inst/CITATION`) and the README with one call, using the DOI shown on your Zenodo entry:
+Log in to [Zenodo](https://zenodo.org/) with your GitHub account. Open the menu next to your email address in the top right corner, choose "GitHub", find your repository in the list and flip its switch to "ON". From now on Zenodo archives every release of the repository. Each release gets its own version DOI, and the record carries one concept DOI that always resolves to the latest version.
+
+## Create the release
+
+Set `Version` in `DESCRIPTION` to the version you release, for example `1.0.0` for the first publication. Run `update_citation()` once more, so that the citation files carry the version, and `devtools::build_readme()`, so that the README names it. Commit and push.
+
+On GitHub, open the repository, click "Releases" and "Draft a new release". Create a tag with the version and a `v` in front, such as `v1.0.0`, give the release the same name and a short description, and publish it. Zenodo picks the release up and creates the archive. This can take up to an hour. The DOIs then appear on the record and on your Zenodo GitHub page.
+
+Open the record on Zenodo and check it. The resource type is Dataset, the community is openwashdata, the creators and the license are right. All of this came from `.zenodo.json`. If something is wrong, fix it in `DESCRIPTION`, run `update_citation()` again for the next release, and correct the record once in the Zenodo editor.
+
+## Bring the DOI into the package
+
+Use the concept DOI, the one Zenodo shows under "Cite all versions". It stays the same across releases, so a citation always resolves to the latest version, while the version in the citation file says which one was used. Back in RStudio, write it into the citation files, the README and the metadata with two calls:
 
 ```{r}
 update_citation(doi = "10.5281/zenodo.11185699")
+update_metadata()
 ```
 
-The function regenerates both citation files from DESCRIPTION, adds the DOI badge to `README.Rmd`, rebuilds `README.md`, and rebuilds the website in `docs/` when it exists. Commit and push the changed files.
+`update_citation()` regenerates the citation files with the DOI, adds the DOI badge to `README.Rmd` and rebuilds `README.md`. `update_metadata()` carries the DOI into the JSON-LD of the site. Run `check_publication_readiness()` once more, then commit the changed files and push. The pkgdown workflow rebuilds the site, and the citation in the README and on the website now shows how to cite the dataset.
 
-## ETH Research Collection Submission
+A package with a Zenodo DOI appears in the [openwashdata data catalogue](https://openwashdata.org/pages/gallery/data/) within a week.
+
+## Later versions
+
+When the data or the documentation changes after publication, raise the version in `DESCRIPTION`, run the steps of this chapter again and create a new release. Zenodo archives the new version under a new version DOI, and the concept DOI keeps resolving to the latest one. The download links in the README point at the release tag of the version in `DESCRIPTION`, so that a citation of a version leads to the same files later.
+
+## ETH Research Collection submission
 
 ::: callout-note
-This section applies only to GHE workflow submissions
+This section applies only to researchers at Global Health Engineering, ETH Zurich.
 :::
 
-For submissions to the ETH Research Collection, navigate to the research data section and select "dataset" as your submission type. Under organizational unit, select "tilley", and set your license to "Creative Commons Attribution 4.0 International". These settings ensure your submission aligns with institutional requirements and makes your data openly accessible while protecting your rights as the creator.
+For a submission to the [ETH Research Collection](https://www.research-collection.ethz.ch/), go to the research data section and choose "dataset" as the submission type. Under organisational unit, select "tilley", and set the license to "Creative Commons Attribution 4.0 International". These settings match the data package and keep the data open while protecting your rights as the creator.

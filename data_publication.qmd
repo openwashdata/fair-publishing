@@ -1,116 +1,84 @@
-# Publishing Your Dataset {#sec-datapublication}
+# Publishing the data {#sec-datapublication}
 
 ```{r, include=FALSE}
 library(washr)
 ```
 
-## Creating and Editing the README
+The package now has data, a dictionary, help pages and metadata. This chapter writes the README that GitHub shows on the repository page and builds the website that presents the dataset.
 
-To start documenting your dataset for publication, you first need to set up a README file.
+## Write the README
 
-### Initialize the README
-
-In your R console, within the project directory, run the following command to create a README file:
-
-```{r}
-setup_readme()
-```
-
-
-If you want the README to include an Example section with a scaffold for a first plot of your data, use this command instead:
+### Create it from the template
 
 ```{r}
 setup_readme(has_example = TRUE)
 ```
 
-The template documents the first data object in `data/`. When your package holds several, copy the data section once per further object.
+washr writes `README.Rmd` from its template. The file holds the title and badges, an introduction placeholder, the installation instructions, a download table with one row per dataset and links to the CSV and XLSX exports, a section for the first dataset with its dimensions, a preview and the variable table from the dictionary, an Example section with a scaffold for a first plot, the license, and a citation section that names the version and the DOI in plain text once they exist. Without `has_example = TRUE` the Example section is left out.
 
-### Editing the README
+### Write the text
 
-Locate the `README.Rmd` file in your project directory and open it. Edit each section of the README to provide relevant information about your package. Typical sections include:
+Open `README.Rmd` and fill in the parts that are yours.
 
-- **Package Name and Brief Description**
-- **Installation Instructions**
-- **Basic Usage**
-- **Features**
-- **Example**
+- The introduction. One paragraph of three to five sentences in place of "The goal of ... is to". Say who collected the data, how, when and where, and under which license or permission the source data was shared.
+- The data sentence. Complete "The dataset ... contains data about".
+- A block per further dataset. The template documents the first dataset in `data/`. For each further one, copy the block from its heading to the end of its variable table and replace the dataset name in the heading, in the sentence, in the preview chunk and in the filter of the variable table.
+- The example. The plot code is commented out. Fill in variables of your dataset, write readable axis labels and a title, and uncomment the block together with the `library(ggplot2)` line. One plot that gives a useful first look at the data is enough. Say in the text what the plot shows.
 
-### Creating a Data Visualization
+The installation instructions, the download table, the dimensions, the previews, the variable tables, the license and the citation are generated. Leave them as they are.
 
-In the "Example" section of your README, it’s helpful to include at least one plot that showcases your data. The section written by `setup_readme(has_example = TRUE)` holds a commented scaffold for it. For instance, using `ggplot2`, you could create a plot like this (adapt it to fit your specific data):
+### Build it
 
-```{r}
-library(ggplot2)
-library(yourpackagename)
-
-ggplot(your_data, aes(x = variable1, y = variable2)) +
-  geom_point() +
-  theme_minimal() +
-  labs(title = "Example Plot from YourPackageName")
-```
-
-### Building the README
-
-Once you’ve completed editing the README, convert it to a Markdown file by running:
+`README.md` is built from `README.Rmd` and never edited by hand:
 
 ```{r}
 devtools::build_readme()
 ```
 
-This will generate a `README.md` file, which GitHub displays on your repository's main page.
+The build loads the packages named in the installation chunk (dplyr, knitr, readr, stringr, gt and kableExtra), so install the ones you are missing when the build stops. Commit both README files and push. GitHub shows `README.md` on the repository page.
 
-### Updating GitHub
+## Build the website
 
-After building the README, go to the "Git" tab in RStudio. Stage the newly created or modified README files, commit them with a message such as "Add and update README," and push the changes to GitHub.
+The website is built by [pkgdown](https://pkgdown.r-lib.org/) from the README, the help pages and the metadata. The review standard has it deployed by a GitHub Actions workflow to the `gh-pages` branch of the repository, so that the built site is never committed and never goes stale. Set up the workflow first, then let washr write the configuration and build.
 
-## Setting Up the Package Website
+### Add the deployment workflow
 
-To enhance your package's accessibility, you can create a website for it.
+```{r}
+usethis::use_github_action("pkgdown")
+```
 
-### Initializing the Website
+The call writes the workflow `.github/workflows/pkgdown.yaml`. It runs on every push to the main branch, builds the site and writes it to the `gh-pages` branch. Nothing else changes yet.
 
-Run the following command in your R console:
+### Write the configuration and build the site
 
 ```{r}
 setup_website()
 ```
 
-The first run writes `_pkgdown.yml` from the openwashdata template and builds the site into `docs/`. Every later run keeps your `_pkgdown.yml` as it is and rebuilds the site, so there is nothing to answer.
+The first run writes `_pkgdown.yml` from the washr template, with the address of the site, the analytics header, the funding sentence in the sidebar and a reference index with one entry per dataset. Every value comes from `DESCRIPTION`. Then it builds the site into `docs/`, which takes a minute. Because the deployment workflow exists, `docs/` stays in `.gitignore`, and the local build is a preview. Open `docs/index.html` in a browser to see it. Every later run keeps `_pkgdown.yml` as it is and rebuilds the site.
 
-### Applying the openwashdata brand
+pkgdown expects the address of the site in `DESCRIPTION` as well, next to the repository URL. Add it, with the value of the `url` line of `_pkgdown.yml`:
 
-To give the site the openwashdata fonts and colors, run:
+```{r}
+desc::desc_add_urls("https://openwashdata.github.io/yourpackagename")
+```
+
+::: {.callout-note}
+A repository that cannot run GitHub Actions can serve the site from the main branch instead. Skip the workflow and run `setup_website()`. Without a workflow it removes `docs` from `.gitignore`, so that the built site is committed. In the Pages settings of the repository, choose the main branch and the `/docs` folder as the source. The review standard prefers the workflow, because a committed site is only as current as its last build.
+:::
+
+### Apply the brand
 
 ```{r}
 use_brand()
 ```
 
-This copies the brand file and the logos from the central brand repository into your package and points `_pkgdown.yml` at them. Run it again whenever the brand changes.
+This copies the brand file and the logos of the openwashdata brand from the latest release of the brand repository into your package, adds them to `.Rbuildignore`, wires `_pkgdown.yml` to them and records the release in `DESCRIPTION`. The site now uses the openwashdata fonts and colours. Run it again after a new brand release. A run with no new release changes nothing. For a package under another organisation, the `Config/washr/brand-source` field in `DESCRIPTION` names the brand repository to copy from, or `none`.
 
-### Document, Check, and Install the Package
+### Check, commit and publish
 
-Ensure your package is up-to-date by running the following commands:
+Run `devtools::document()`, `devtools::check()` and `devtools::install()` once more, then commit everything and push. The push starts the pkgdown workflow on GitHub, which builds the site and writes it to the `gh-pages` branch. The branch appears with the first run, after a few minutes.
 
-```{r}
-devtools::document()
-devtools::check()
-devtools::install()
-```
+Then open the repository on GitHub, go to "Settings" and "Pages", and under "Build and deployment" choose "Deploy from a branch", with the `gh-pages` branch and the root folder as the source. The site is live at the address in `_pkgdown.yml` a minute later, and every later push rebuilds it.
 
-These commands generate the latest documentation, check the package for issues, and install it locally.
-
-### Preparing for GitHub Pages
-
-To host the package website on GitHub Pages, Git has to track the built site. `setup_website()` removes the `docs` line from `.gitignore` for you, so the `docs/` folder is tracked. Check that the line is gone before you commit.
-
-### Updating GitHub with Website Files
-
-Go to the "Git" tab in RStudio. You should now see new files in the `docs/` folder and the updated `.gitignore` file. Stage these changes, commit them with a message like "Add pkgdown website files," and push the updates to GitHub.
-
-### Setting Up GitHub Pages
-
-To activate the website, open your GitHub repository in a web browser. Go to "Settings" > "Pages." Under "Source," select the branch where your `docs/` folder resides (usually "main" or "master") and set the folder to `/docs`. Finally, click "Save."
-
-Your package website will now be live at `https://yourusername.github.io/yourrepositoryname/`.
-
-Remember, if you make significant changes to your package or documentation, you may need to rebuild the website by running `pkgdown::build_site()` and pushing the updated `docs/` folder to GitHub.
+Reports about the package in the openwashdata look, as PDF or Word documents, use the [quarto-owd](https://github.com/openwashdata/quarto-owd) Quarto extension. It reads the brand file that `use_brand()` installed.

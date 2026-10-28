@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://global-health-engineering.github.io/ghedatapublishing/index.html</loc>
-    <lastmod>2026-09-24T12:16:16.335Z</lastmod>
+    <loc>https://openwashdata.github.io/fair-publishing/index.html</loc>
+    <lastmod>2026-10-27T13:26:18.818Z</lastmod>
   </url>
   <url>
-    <loc>https://global-health-engineering.github.io/ghedatapublishing/creating_repo.html</loc>
-    <lastmod>2026-09-24T12:16:38.598Z</lastmod>
+    <loc>https://openwashdata.github.io/fair-publishing/creating_repo.html</loc>
+    <lastmod>2026-10-27T13:26:19.310Z</lastmod>
   </url>
   <url>
-    <loc>https://global-health-engineering.github.io/ghedatapublishing/data_preparation.html</loc>
-    <lastmod>2026-09-24T12:16:16.327Z</lastmod>
+    <loc>https://openwashdata.github.io/fair-publishing/data_preparation.html</loc>
+    <lastmod>2026-10-27T13:26:19.808Z</lastmod>
   </url>
   <url>
-    <loc>https://global-health-engineering.github.io/ghedatapublishing/data_documentation.html</loc>
-    <lastmod>2026-09-24T12:16:49.624Z</lastmod>
+    <loc>https://openwashdata.github.io/fair-publishing/data_documentation.html</loc>
+    <lastmod>2026-10-27T13:26:20.304Z</lastmod>
   </url>
   <url>
-    <loc>https://global-health-engineering.github.io/ghedatapublishing/data_publication.html</loc>
-    <lastmod>2026-09-24T12:16:16.327Z</lastmod>
+    <loc>https://openwashdata.github.io/fair-publishing/data_publication.html</loc>
+    <lastmod>2026-10-27T13:26:20.797Z</lastmod>
   </url>
   <url>
-    <loc>https://global-health-engineering.github.io/ghedatapublishing/creating_doi.html</loc>
-    <lastmod>2026-09-24T12:16:16.326Z</lastmod>
+    <loc>https://openwashdata.github.io/fair-publishing/creating_doi.html</loc>
+    <lastmod>2026-10-27T13:26:21.287Z</lastmod>
   </url>
   <url>
-    <loc>https://global-health-engineering.github.io/ghedatapublishing/troubleshooting.html</loc>
-    <lastmod>2026-09-24T12:16:16.335Z</lastmod>
+    <loc>https://openwashdata.github.io/fair-publishing/troubleshooting.html</loc>
+    <lastmod>2026-10-27T13:26:21.784Z</lastmod>
   </url>
   <url>
-    <loc>https://global-health-engineering.github.io/ghedatapublishing/Data-Publishing-with-`washr`.pdf</loc>
-    <lastmod>2026-09-24T12:17:13.672Z</lastmod>
+    <loc>https://openwashdata.github.io/fair-publishing/fair-data-publishing.pdf</loc>
+    <lastmod>2026-10-27T13:26:48.919Z</lastmod>
   </url>
 </urlset>
