@@ -19,15 +19,19 @@ library(washr)
 setup_rawdata()
 ```
 
+For a package with more than one dataset, name the data frames:
+
+```{r}
+setup_rawdata(datasets = c("yourpackagename_survey", "yourpackagename_waste"))
+```
+
 This creates the folder `data-raw/` and a processing script, `data-raw/data_processing.R`, with the steps the script should follow. Copy or move your raw files into `data-raw/`. The raw files are kept exactly as you received them and are never edited by hand. Every change happens in the script, so anyone can trace the published data back to the source.
 
 Commit the raw files and push.
 
 ## Clean and process the raw data
 
-Open `data-raw/data_processing.R`. The script reads the raw files, cleans them into one or more tidy data frames and saves each one in two forms. `usethis::use_data()` writes an `.rda` file into `data/`, which is what the package loads. `readr::write_csv()` and `openxlsx::write.xlsx()` write a CSV and an XLSX file into `inst/extdata/`, which is what the website and the download table of the README link to. The template already holds the reading, saving and export blocks for one data frame named after the package. Add your cleaning steps in between, and keep that name for your main dataset or change it in all three export calls.
-
-A package can hold more than one dataset. In that case, repeat the saving and export block for each data frame, so that each one lands in `data/` and in `inst/extdata/`.
+Open `data-raw/data_processing.R`. The script reads the raw files, cleans them into one or more tidy data frames and saves each one in two forms. `usethis::use_data()` writes an `.rda` file into `data/`, which is what the package loads. `readr::write_csv()` and `openxlsx::write.xlsx()` write a CSV and an XLSX file into `inst/extdata/`, which is what the website and the download table of the README link to. The template already holds the reading step, one `use_data()` line per dataset and a loop that exports each one. Without the `datasets` argument there is one data frame named after the package. Add your cleaning steps in between and keep the names you chose, so that each data frame lands in `data/` and in `inst/extdata/`.
 
 When the script is finished, run it from top to bottom with "Source" in the editor. Check the results in `data/` and `inst/extdata/`, then commit the script and the generated files and push.
 
