@@ -30,11 +30,11 @@ Log in to [Zenodo](https://zenodo.org/) with your GitHub account. Open the menu 
 
 ## Create the release
 
-Set `Version` in `DESCRIPTION` to the version you release, for example `1.0.0` for the first publication. Run `update_citation()` once more, so that the citation files carry the version, and `devtools::build_readme()`, so that the README names it. Commit and push.
+Set `Version` in `DESCRIPTION` to the version you release, for example `1.0.0` for the first publication, and set the release date with `update_description(date = "today")`; washr keeps an existing date otherwise. Run `update_citation()` once more, so that the citation files carry the version, and `devtools::build_readme()`, so that the README names it. Commit and push.
 
 On GitHub, open the repository, click "Releases" and "Draft a new release". Create a tag with the version and a `v` in front, such as `v1.0.0`, give the release the same name and a short description, and publish it. Zenodo picks the release up and creates the archive. This can take up to an hour. The DOIs then appear on the record and on your Zenodo GitHub page.
 
-Open the record on Zenodo and check it. The resource type is Dataset, the community is openwashdata, the creators and the license are right. All of this came from `.zenodo.json`. If something is wrong, fix it in `DESCRIPTION`, run `update_citation()` again for the next release, and correct the record once in the Zenodo editor.
+Open the record on Zenodo and check it. The resource type is Dataset, the creators and the license are right, the description ends with a link to the package website, and the related works link the GitHub repository and the website. All of this came from `.zenodo.json`. The community needs one more step: Zenodo only sends a request to the openwashdata community, and a curator of the community accepts it. Until then the record does not show the community; ask the openwashdata team if it stays missing. If something is wrong, fix it in `DESCRIPTION`, run `update_citation()` again for the next release, and correct the record once in the Zenodo editor.
 
 ## Bring the DOI into the package
 
@@ -49,9 +49,19 @@ update_metadata()
 
 A package with a Zenodo DOI appears in the [openwashdata data catalogue](https://openwashdata.org/pages/gallery/data/) within a week.
 
+## Text for the article
+
+When the data belong to an article, its authors need a reference list entry and a data availability statement. washr drafts both from the package, with the in-text citation:
+
+```{r}
+data_availability_statement(subject = "The household survey data")
+```
+
+`subject` holds the opening words of the statement; without it the statement opens with "The data". If some data were left out to protect the respondents, for example coordinates or free text, write that sentence into `DESCRIPTION` as `Config/washr/withheld`, and the statement ends with it.
+
 ## Later versions
 
-When the data or the documentation changes after publication, raise the version in `DESCRIPTION`, run the steps of this chapter again and create a new release. Zenodo archives the new version under a new version DOI, and the concept DOI keeps resolving to the latest one. The download links in the README point at the release tag of the version in `DESCRIPTION`, so that a citation of a version leads to the same files later.
+The version changes only when the data, or the meaning of the data, changes: major when columns are renamed or removed, minor for new data, rows or variables, patch for corrected values or a documentation fix that changes how the data are read, such as a unit or a variable description. Changes to the website, an article or wording that does not change the meaning keep the version and need no release. When the data change, set the development version with `usethis::use_dev_version()` and run `update_citation()` and `update_metadata()`; `check_publication_readiness()` reports changed data on a release version. When the changes are complete, raise the version in `DESCRIPTION`, run the steps of this chapter again and create a new release. Zenodo archives the new version under a new version DOI, and the concept DOI keeps resolving to the latest one. The download links in the README point at the release tag of the version in `DESCRIPTION`, so that a citation of a version leads to the same files later.
 
 ## ETH Research Collection submission
 

@@ -14,15 +14,14 @@ The package now has data, a dictionary, help pages and metadata. This chapter wr
 setup_readme(has_example = TRUE)
 ```
 
-washr writes `README.Rmd` from its template. The file holds the title and badges, an introduction placeholder, the installation instructions, a download table with one row per dataset and links to the CSV and XLSX exports, a section for the first dataset with its dimensions, a preview and the variable table from the dictionary, an Example section with a scaffold for a first plot, the license, and a citation section that names the version and the DOI in plain text once they exist. Without `has_example = TRUE` the Example section is left out.
+washr writes `README.Rmd` from its template. The file holds the title and badges, an introduction placeholder, the installation instructions, a download table with one row per dataset and links to the CSV and XLSX exports, a section per dataset in `data/` with its dimensions, a preview and the variable table from the dictionary, an Example section with a scaffold for a first plot, the license, and a citation section that names the version and the DOI in plain text once they exist. Without `has_example = TRUE` the Example section is left out.
 
 ### Write the text
 
 Open `README.Rmd` and fill in the parts that are yours.
 
 - The introduction. One paragraph of three to five sentences in place of "The goal of ... is to". Say who collected the data, how, when and where, and under which license or permission the source data was shared.
-- The data sentence. Complete "The dataset ... contains data about".
-- A block per further dataset. The template documents the first dataset in `data/`. For each further one, copy the block from its heading to the end of its variable table and replace the dataset name in the heading, in the sentence, in the preview chunk and in the filter of the variable table.
+- The data sentences. Complete "The dataset ... contains data about" in the section of each dataset.
 - The example. The plot code is commented out. Fill in variables of your dataset, write readable axis labels and a title, and uncomment the block together with the `library(ggplot2)` line. One plot that gives a useful first look at the data is enough. Say in the text what the plot shows.
 
 The installation instructions, the download table, the dimensions, the previews, the variable tables, the license and the citation are generated. Leave them as they are.
