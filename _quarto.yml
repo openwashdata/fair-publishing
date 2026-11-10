@@ -5,13 +5,25 @@ project:
 execute:
   eval: false
 
+brand:
+  light: _brand/_brand.yml
+  dark: _brand/_brand-dark.yml
+
 book:
   title: "FAIR Data Publishing"
   subtitle: "Publishing a dataset as an R data package with washr"
   output-file: fair-data-publishing
   search: true
-  cover-image: owd-cover.png
-  favicon: owd-cover.png
+  favicon: _brand/logos/OWD-logo-18.png
+  sidebar:
+    logo:
+      light:
+        path: _brand/logos/OWD-logo-18.png
+        alt: openwashdata
+      dark:
+        path: _brand/logos/OWD-logo-16.png
+        alt: openwashdata
+    logo-href: https://openwashdata.org
   page-footer:
     left: |
       FAIR Data Publishing is maintained by the <a href="https://openwashdata.org/about#team">openwashdata team</a> at <a href="https://ghe.ethz.ch/">Global Health Engineering</a>, ETH Zurich
@@ -36,6 +48,11 @@ book:
 
 format:
   html:
-    theme: pulse
+    theme:
+      light: brand
+      dark: brand
+    include-in-header:
+      text: |
+        <script defer data-domain="openwashdata.github.io" src="https://plausible.io/js/script.js"></script>
   pdf:
     documentclass: scrreprt
