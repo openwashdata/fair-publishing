@@ -399,8 +399,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#connect-the-repository-to-zenodo" id="toc-connect-the-repository-to-zenodo" class="nav-link" data-scroll-target="#connect-the-repository-to-zenodo"><span class="header-section-number">5.3</span> Connect the repository to Zenodo</a></li>
   <li><a href="#create-the-release" id="toc-create-the-release" class="nav-link" data-scroll-target="#create-the-release"><span class="header-section-number">5.4</span> Create the release</a></li>
   <li><a href="#bring-the-doi-into-the-package" id="toc-bring-the-doi-into-the-package" class="nav-link" data-scroll-target="#bring-the-doi-into-the-package"><span class="header-section-number">5.5</span> Bring the DOI into the package</a></li>
-  <li><a href="#later-versions" id="toc-later-versions" class="nav-link" data-scroll-target="#later-versions"><span class="header-section-number">5.6</span> Later versions</a></li>
-  <li><a href="#eth-research-collection-submission" id="toc-eth-research-collection-submission" class="nav-link" data-scroll-target="#eth-research-collection-submission"><span class="header-section-number">5.7</span> ETH Research Collection submission</a></li>
+  <li><a href="#text-for-the-article" id="toc-text-for-the-article" class="nav-link" data-scroll-target="#text-for-the-article"><span class="header-section-number">5.6</span> Text for the article</a></li>
+  <li><a href="#later-versions" id="toc-later-versions" class="nav-link" data-scroll-target="#later-versions"><span class="header-section-number">5.7</span> Later versions</a></li>
+  <li><a href="#eth-research-collection-submission" id="toc-eth-research-collection-submission" class="nav-link" data-scroll-target="#eth-research-collection-submission"><span class="header-section-number">5.8</span> ETH Research Collection submission</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/openwashdata/fair-publishing/edit/main/creating_doi.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/openwashdata/fair-publishing/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -449,9 +450,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="create-the-release" class="level2" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="create-the-release"><span class="header-section-number">5.4</span> Create the release</h2>
-<p>Set <code>Version</code> in <code>DESCRIPTION</code> to the version you release, for example <code>1.0.0</code> for the first publication. Run <code>update_citation()</code> once more, so that the citation files carry the version, and <code>devtools::build_readme()</code>, so that the README names it. Commit and push.</p>
+<p>Set <code>Version</code> in <code>DESCRIPTION</code> to the version you release, for example <code>1.0.0</code> for the first publication, and set the release date with <code>update_description(date = "today")</code>; washr keeps an existing date otherwise. Run <code>update_citation()</code> once more, so that the citation files carry the version, and <code>devtools::build_readme()</code>, so that the README names it. Commit and push.</p>
 <p>On GitHub, open the repository, click “Releases” and “Draft a new release”. Create a tag with the version and a <code>v</code> in front, such as <code>v1.0.0</code>, give the release the same name and a short description, and publish it. Zenodo picks the release up and creates the archive. This can take up to an hour. The DOIs then appear on the record and on your Zenodo GitHub page.</p>
-<p>Open the record on Zenodo and check it. The resource type is Dataset, the community is openwashdata, the creators and the license are right. All of this came from <code>.zenodo.json</code>. If something is wrong, fix it in <code>DESCRIPTION</code>, run <code>update_citation()</code> again for the next release, and correct the record once in the Zenodo editor.</p>
+<p>Open the record on Zenodo and check it. The resource type is Dataset, the creators and the license are right, the description ends with a link to the package website, and the related works link the GitHub repository and the website. All of this came from <code>.zenodo.json</code>. The community needs one more step: Zenodo only sends a request to the openwashdata community, and a curator of the community accepts it. Until then the record does not show the community; ask the openwashdata team if it stays missing. If something is wrong, fix it in <code>DESCRIPTION</code>, run <code>update_citation()</code> again for the next release, and correct the record once in the Zenodo editor.</p>
 </section>
 <section id="bring-the-doi-into-the-package" class="level2" data-number="5.5">
 <h2 data-number="5.5" class="anchored" data-anchor-id="bring-the-doi-into-the-package"><span class="header-section-number">5.5</span> Bring the DOI into the package</h2>
@@ -463,12 +464,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>update_citation()</code> regenerates the citation files with the DOI, adds the DOI badge to <code>README.Rmd</code> and rebuilds <code>README.md</code>. <code>update_metadata()</code> carries the DOI into the JSON-LD of the site. Run <code>check_publication_readiness()</code> once more, then commit the changed files and push. The pkgdown workflow rebuilds the site, and the citation in the README and on the website now shows how to cite the dataset.</p>
 <p>A package with a Zenodo DOI appears in the <a href="https://openwashdata.org/pages/gallery/data/">openwashdata data catalogue</a> within a week.</p>
 </section>
-<section id="later-versions" class="level2" data-number="5.6">
-<h2 data-number="5.6" class="anchored" data-anchor-id="later-versions"><span class="header-section-number">5.6</span> Later versions</h2>
-<p>When the data or the documentation changes after publication, raise the version in <code>DESCRIPTION</code>, run the steps of this chapter again and create a new release. Zenodo archives the new version under a new version DOI, and the concept DOI keeps resolving to the latest one. The download links in the README point at the release tag of the version in <code>DESCRIPTION</code>, so that a citation of a version leads to the same files later.</p>
+<section id="text-for-the-article" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="text-for-the-article"><span class="header-section-number">5.6</span> Text for the article</h2>
+<p>When the data belong to an article, its authors need a reference list entry and a data availability statement. washr drafts both from the package, with the in-text citation:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data_availability_statement</span>(<span class="at">subject =</span> <span class="st">"The household survey data"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code>subject</code> holds the opening words of the statement; without it the statement opens with “The data”. If some data were left out to protect the respondents, for example coordinates or free text, write that sentence into <code>DESCRIPTION</code> as <code>Config/washr/withheld</code>, and the statement ends with it.</p>
 </section>
-<section id="eth-research-collection-submission" class="level2" data-number="5.7">
-<h2 data-number="5.7" class="anchored" data-anchor-id="eth-research-collection-submission"><span class="header-section-number">5.7</span> ETH Research Collection submission</h2>
+<section id="later-versions" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="later-versions"><span class="header-section-number">5.7</span> Later versions</h2>
+<p>The version changes only when the data, or the meaning of the data, changes: major when columns are renamed or removed, minor for new data, rows or variables, patch for corrected values or a documentation fix that changes how the data are read, such as a unit or a variable description. Changes to the website, an article or wording that does not change the meaning keep the version and need no release. When the data change, set the development version with <code>usethis::use_dev_version()</code> and run <code>update_citation()</code> and <code>update_metadata()</code>; <code>check_publication_readiness()</code> reports changed data on a release version. When the changes are complete, raise the version in <code>DESCRIPTION</code>, run the steps of this chapter again and create a new release. Zenodo archives the new version under a new version DOI, and the concept DOI keeps resolving to the latest one. The download links in the README point at the release tag of the version in <code>DESCRIPTION</code>, so that a citation of a version leads to the same files later.</p>
+</section>
+<section id="eth-research-collection-submission" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="eth-research-collection-submission"><span class="header-section-number">5.8</span> ETH Research Collection submission</h2>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">

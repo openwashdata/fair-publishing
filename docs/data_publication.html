@@ -441,15 +441,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setup_readme</span>(<span class="at">has_example =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>washr writes <code>README.Rmd</code> from its template. The file holds the title and badges, an introduction placeholder, the installation instructions, a download table with one row per dataset and links to the CSV and XLSX exports, a section for the first dataset with its dimensions, a preview and the variable table from the dictionary, an Example section with a scaffold for a first plot, the license, and a citation section that names the version and the DOI in plain text once they exist. Without <code>has_example = TRUE</code> the Example section is left out.</p>
+<p>washr writes <code>README.Rmd</code> from its template. The file holds the title and badges, an introduction placeholder, the installation instructions, a download table with one row per dataset and links to the CSV and XLSX exports, a section per dataset in <code>data/</code> with its dimensions, a preview and the variable table from the dictionary, an Example section with a scaffold for a first plot, the license, and a citation section that names the version and the DOI in plain text once they exist. Without <code>has_example = TRUE</code> the Example section is left out.</p>
 </section>
 <section id="write-the-text" class="level3" data-number="4.1.2">
 <h3 data-number="4.1.2" class="anchored" data-anchor-id="write-the-text"><span class="header-section-number">4.1.2</span> Write the text</h3>
 <p>Open <code>README.Rmd</code> and fill in the parts that are yours.</p>
 <ul>
 <li>The introduction. One paragraph of three to five sentences in place of “The goal of … is to”. Say who collected the data, how, when and where, and under which license or permission the source data was shared.</li>
-<li>The data sentence. Complete “The dataset … contains data about”.</li>
-<li>A block per further dataset. The template documents the first dataset in <code>data/</code>. For each further one, copy the block from its heading to the end of its variable table and replace the dataset name in the heading, in the sentence, in the preview chunk and in the filter of the variable table.</li>
+<li>The data sentences. Complete “The dataset … contains data about” in the section of each dataset.</li>
 <li>The example. The plot code is commented out. Fill in variables of your dataset, write readable axis labels and a title, and uncomment the block together with the <code>library(ggplot2)</code> line. One plot that gives a useful first look at the data is enough. Say in the text what the plot shows.</li>
 </ul>
 <p>The installation instructions, the download table, the dimensions, the previews, the variable tables, the license and the citation are generated. Leave them as they are.</p>
